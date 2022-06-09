@@ -1,0 +1,35 @@
+
+
+html{
+    font-size: 62.5%;
+}
+
+*, ::after, ::before{
+    box-sizing: border-box;
+}
+
+body{
+    font-size: 1.6rem;
+    font-family: 'Kumbh Sans', sans-serif;
+}
+
+
+
+/* Color Palette */
+
+:root{
+
+    /*Primary*/
+    --color-orange: hsl(26, 100%, 55%);
+    --color-pale-orange: hsl(25, 100%, 94%);
+
+    /*Neutral*/
+    --color-Very-vark-blue: hsl(220, 13%, 13%);
+    --color-Dark-grayish-blue: hsl(219, 9%, 45%);
+    --color-Grayish-blue: hsl(220, 14%, 75%);
+    --color-Light-grayish-blue: hsl(223, 64%, 98%);
+    --color-White: hsl(0, 0%, 100%);
+    --color-Black : hsl(0, 0%, 0%);
+
+    /*  (black with 75% opacity for lightbox background) */
+}

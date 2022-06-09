@@ -48,7 +48,7 @@ body{
     display: inline-block;
     padding: 0.5rem 1rem;
     color: var(--color-orange);
-    background-color: hsl(26, 100%, 55%, 0.2);
+    background-color: var(--color-pale-orange);
     border-radius: 6px;
     font-weight: 700;
     margin: 0rem 1rem;
@@ -93,13 +93,52 @@ body{
     background-color: var(--color-Light-grayish-blue);
     padding: 2rem;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 .product__quantity-selector .icon--minus{
     position: relative;
     top: -3px;
 }
+
+/* Buttons */
+
+.btn{
+    border-radius: 8px;
+    text-align: center;
+    outline: 0;
+    border: 0;
+    padding: 1.8rem;
+    font-weight: 600;
+}
+
+.btn--cart{
+    background-color: var(--color-orange);
+    color: var(--color-White);
+}
+
+.fill{
+    width: 100%;
+}
+
+
+
+/* Cart Section */
+
+.cart__button-container{
+    position: relative;
+}
+
+.cart__button-container .icon{
+    width: 25px;
+    position: absolute;
+    top: 5px;
+    margin-right: 0.5rem;
+    top: 18px;
+    left: 140px;
+}
+
+
 
 
 

@@ -15,6 +15,7 @@ body{
 
 
 
+
 /* Color Palette */
 
 :root{
@@ -108,7 +109,7 @@ body{
     text-align: center;
     outline: 0;
     border: 0;
-    padding: 1.8rem;
+    padding: 2rem;
     font-weight: 600;
 }
 
@@ -125,17 +126,36 @@ body{
 
 /* Cart Section */
 
-.cart__button-container{
-    position: relative;
+.btn--cart{
+    margin-top: 2rem;
 }
 
-.cart__button-container .icon{
-    width: 25px;
-    position: absolute;
-    top: 5px;
-    margin-right: 0.5rem;
-    top: 18px;
-    left: 140px;
+.btn--cart .icon{
+    margin-right: 0.7rem;
+}
+
+
+@media screen and (min-width:768px) {
+    .add-to-cart{
+        grid-template-columns: 30% 70%;
+    }
+
+    .btn--cart{
+        margin-left: 2rem;
+        margin-top: 0;
+    }
+}
+
+/* grid */
+
+.grid{
+    display: grid;
+}
+
+@media screen and(min-width:768px) {
+    .grid--cols-2{
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 

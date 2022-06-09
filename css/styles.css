@@ -82,3 +82,24 @@ body{
     }
 }
 
+
+
+/* Quantity Selector */
+
+.product__quantity-selector{
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    background-color: var(--color-Light-grayish-blue);
+    padding: 2rem;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.product__quantity-selector .icon--minus{
+    position: relative;
+    top: -3px;
+}
+
+
+

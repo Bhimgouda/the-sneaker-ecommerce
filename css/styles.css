@@ -33,3 +33,52 @@ body{
 
     /*  (black with 75% opacity for lightbox background) */
 }
+
+
+/* Product Pricing Panel */
+
+.product__pricing-panel{
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    align-items: center;
+}
+
+.product__discount{
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    color: var(--color-orange);
+    background-color: hsl(26, 100%, 55%, 0.2);
+    border-radius: 6px;
+    font-weight: 700;
+    margin: 0rem 1rem;
+}
+
+.product__original-price{
+    text-decoration: line-through;
+    color: var(--color-Grayish-blue);
+    font-weight: 600;
+}
+
+.product__discounted-price{
+    font-weight: 700;
+    font-size: 2.8rem;
+    position: relative;
+    top: 4px;
+}
+
+.price::before{
+    content: '$';
+}
+
+@media screen and (min-width:768px) {
+    .product__pricing-panel{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .product__original-price{
+        margin-top: 0.7rem;
+    }
+}
+

@@ -526,6 +526,10 @@ body{
     .nav__links li{
         margin: 0 2rem;
     }
+
+    .navbar{
+        padding: 0;
+    }
 }
 
 
@@ -539,7 +543,7 @@ body{
     .nav__links{
         position: absolute;
         flex-direction: column;
-        height: 100vh;
+        height: calc(100vh - 62.65px);
         top: 62.65px;
         left: -300px;
         font-weight: bold;
@@ -549,7 +553,7 @@ body{
         justify-content: flex-start;
         width: 40vw;
         padding: 0rem 2rem ;
-        transition: all 0.4s;
+        transition: all 0.3s ease-in-out;
     }
 
     .nav__burger div{
@@ -579,11 +583,13 @@ body{
     }
 
     .nav__burger--close div:nth-of-type(1){
+        transition: all 0.2s;
         transform: rotate(45deg);
         position: relative;
         top: 8.1px;
     }
     .nav__burger--close div:nth-of-type(3){
+        transition: all 0.2s;
         transform: rotate(-45deg);
         position: relative;
         bottom: 8.1px;
@@ -594,10 +600,9 @@ body{
     }
 
     .nav__links li{
-        padding: 2rem 0;
-        margin: 0;
+        padding: 0.5rem;
+        margin: 1rem 0;
     }
-
 }
 
 

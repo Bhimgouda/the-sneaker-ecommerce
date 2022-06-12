@@ -572,10 +572,6 @@ body{
     }
 }
 
-@media screen and min-wid{
-    
-}
-
 .overlay__image{
     position: relative;
 }

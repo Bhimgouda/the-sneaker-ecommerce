@@ -1,6 +1,6 @@
-<section class="product">
+<section class="product--main container">
   <div class="product__header">
-    <div class="product__image-container">
+    <div class="product__image-container disable-select">
       <div class="image-slider">
         <!-- clones for slider and smooth transition purposes-->
         <img src="./images/image-product-4.webp" alt="" id="last-clone" />
@@ -27,7 +27,7 @@
         <!--clones for slider and smooth transition purposes-->
         <img src="./images/image-product-1.webp" alt="" id="first-clone" />
       </div>
-      <span class="icon-container" id="prev-btn"
+      <span class="icon-container" id="prev-btn--main"
         ><svg width="12" height="18" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M11 1 3 9l8 8"
@@ -38,7 +38,7 @@
           />
         </svg>
       </span>
-      <span class="icon-container" id="next-btn">
+      <span class="icon-container" id="next-btn--main">
         <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg">
           <path
             d="m2 1 8 8-8 8"
@@ -49,6 +49,28 @@
           />
         </svg>
       </span>
+    </div>
+    <div class="thumbnail-container--main">
+      <img
+        class="thumbnail thumbnail__current"
+        src="./images/image-product-1-thumbnail.webp"
+        alt=""
+      />
+      <img
+        class="thumbnail"
+        src="./images/image-product-2-thumbnail.webp"
+        alt=""
+      />
+      <img
+        class="thumbnail"
+        src="./images/image-product-3-thumbnail.webp"
+        alt=""
+      />
+      <img
+        class="thumbnail"
+        src="./images/image-product-4-thumbnail.webp"
+        alt=""
+      />
     </div>
   </div>
   <div class="product__body">

@@ -352,7 +352,7 @@ body{
 @media screen and (min-width:1024px) {
 
     .product__body{
-        margin-left: 7rem;
+        margin-left: 9rem;
     }
     
     .product--main{
@@ -402,6 +402,7 @@ body{
 }
 
 .navbar{
+    position: relative;
     padding: 0 2rem;
     display: flex;
     align-items: center;
@@ -421,11 +422,12 @@ body{
     align-items: center;
 }
 
-.navbar .user__cart{
+.navbar .user__cart-icon{
+    padding: 3rem 0.5rem;
     cursor: pointer; 
 }
 
-.navbar .user__cart:hover path{
+.navbar .user__cart-icon:hover path{
     fill: var(--color-Very-vark-blue);
 }
 
@@ -478,12 +480,16 @@ body{
         left: -300px;
         font-weight: bold;
         color: black;
-        z-index: 100;
+        z-index: 20;
         background-color: #fff;
         justify-content: flex-start;
         width: 40vw;
         padding: 0rem 2rem ;
         transition: all 0.3s ease-in-out;
+    }
+
+    .navbar .user__cart-icon{
+        padding: 0;
     }
     
     .nav__burger div{
@@ -559,7 +565,7 @@ body{
 @media screen and (min-width:768px) {
     .product--overlay{
         position: fixed;
-        z-index: 10;
+        z-index: 100;
         width: 100vw;
         height: 100vh;
         display: flex;
@@ -629,10 +635,19 @@ body{
 
 
 .product--cart{
+    position: absolute;
+    z-index: 30;
+    top: 70px;
+    right: 0;
     width: 90vw;
     margin: 0 auto;
+    background-color: white;
     border-radius:10px;
-    box-shadow: 0 0 50px 5px rgb(208, 208, 208) ;
+    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.product--cart--hidden{
+    display: none;
 }
 
 .cart__product-display{

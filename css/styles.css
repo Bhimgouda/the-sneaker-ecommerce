@@ -371,7 +371,7 @@ body{
     }
 
     .product--main{
-        padding: 0;
+        min-height: 66vh;
     }
 }
 
@@ -423,7 +423,7 @@ body{
 }
 
 .navbar .user__cart-icon{
-    padding: 3rem 0.5rem;
+    padding: 3rem 1rem;
     cursor: pointer; 
 }
 
@@ -434,7 +434,7 @@ body{
 .user__image img{
     width: 45px;
     height: 45px;
-    margin-left: 3rem;
+    margin-left: 2rem;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -637,8 +637,9 @@ body{
 .product--cart{
     position: absolute;
     z-index: 30;
-    top: 70px;
+    left: 0;
     right: 0;
+    top: 70px;
     width: 90vw;
     margin: 0 auto;
     background-color: white;
@@ -743,6 +744,11 @@ body{
 @media screen and (min-width:425px) {
     .product--cart{
         max-width: max-content;
+        position: absolute;
+        z-index: 30;
+        top: 70px;
+        right: 10px;
+        left: auto;
     }
     .cart__product-title{
         inline-size: 200px;
@@ -752,5 +758,7 @@ body{
         padding: 4rem 10rem;  
     }
 }
+
+
 
 

@@ -95,7 +95,7 @@ navToggler.addEventListener('click',()=>{
 const userCartIcon = document.querySelector('.user__cart-icon');
 const productCart = document.querySelector('.product--cart');
 
-if (window.screen.width > 768){
+if (window.screen.width> 768){
         userCartIcon.addEventListener('mouseover', showcart);
         userCartIcon.addEventListener('mouseout', hidecart)
 
@@ -115,7 +115,7 @@ if (window.screen.width > 768){
 
 else{
     userCartIcon.addEventListener('click',()=>{
-        userCartIcon.classList.toggle('product--cart--hidden')
+        productCart.classList.toggle('product--cart--hidden')
     })
 }
 

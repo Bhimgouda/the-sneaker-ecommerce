@@ -88,3 +88,34 @@ navToggler.addEventListener('click',()=>{
 })
 
 
+
+
+/* User Cart */
+
+const userCartIcon = document.querySelector('.user__cart-icon');
+const productCart = document.querySelector('.product--cart');
+
+if (window.screen.width > 768){
+        userCartIcon.addEventListener('mouseover', showcart);
+        userCartIcon.addEventListener('mouseout', hidecart)
+
+        productCart.addEventListener('mouseover', showcart);
+        productCart.addEventListener('mouseout', hidecart);
+
+
+
+        function showcart(){
+        productCart.classList.remove('product--cart--hidden');
+        }
+
+        function hidecart(){
+        productCart.classList.add('product--cart--hidden')
+        }
+}
+
+else{
+    userCartIcon.addEventListener('click',()=>{
+        userCartIcon.classList.toggle('product--cart--hidden')
+    })
+}
+

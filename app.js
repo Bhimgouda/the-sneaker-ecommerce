@@ -95,27 +95,56 @@ navToggler.addEventListener('click',()=>{
 const userCartIcon = document.querySelector('.user__cart-icon');
 const productCart = document.querySelector('.product--cart');
 
-if (window.screen.width> 768){
+if (window.innerWidth>768){
+        console.log('runs1')
         userCartIcon.addEventListener('mouseover', showcart);
         userCartIcon.addEventListener('mouseout', hidecart)
-
+        
         productCart.addEventListener('mouseover', showcart);
         productCart.addEventListener('mouseout', hidecart);
-
-
-
+        
+        
+        
         function showcart(){
-        productCart.classList.remove('product--cart--hidden');
+            productCart.classList.remove('product--cart--hidden');
         }
-
+        
         function hidecart(){
-        productCart.classList.add('product--cart--hidden')
+            productCart.classList.add('product--cart--hidden')
         }
-}
-
-else{
+    }
+    
+if(window.innerWidth<768){
+    console.log('runs2')
     userCartIcon.addEventListener('click',()=>{
         productCart.classList.toggle('product--cart--hidden')
     })
 }
+
+
+
+/* Quantity Selector */
+
+const quantityMinus = document.querySelector('.icon--minus')
+const quantityPlus = document.querySelector('.icon--plus')
+const productQuantityMain = document.querySelector('.product__quantity')
+
+let quantity = 1;
+
+quantityMinus.addEventListener('click', removeQuantity)
+quantityPlus.addEventListener('click', addQuantity)
+
+function removeQuantity(){
+    console.log('clicked')
+    if(quantity>1){
+        quantity--;
+        productQuantityMain.textContent = `${quantity}`;
+    }
+}
+function addQuantity(){
+    console.log('clicked')
+        quantity++;
+        productQuantityMain.textContent = `${quantity}`;
+}
+
 

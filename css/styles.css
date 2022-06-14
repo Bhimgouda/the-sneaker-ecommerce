@@ -91,13 +91,14 @@ body{
 
 .icon--plus,.icon--minus{
     text-align: center;
-    cursor: pointer;
     display: inline-block;
     height: 100%;
     position: relative;
+    cursor: pointer;
+    padding: 1rem;
 }
 
-.icon--minus svg{
+.icon--minus img{
     position: absolute;
     top: 9.5px;
     left: 4px;
@@ -107,18 +108,17 @@ body{
     position: absolute;
     top: 3.5px;
     right: 5px;
-
 }
 
 @media screen and (min-width:768px) {
     .icon--minus svg{
-        top: 14px;
-        left: 12px;
+        top: 10px;
+        left: 15px;
     }
 
     .icon--plus svg{
         top: 7.5px;
-        right: 10px;
+        right: 4px;
     }
 }
 
@@ -148,7 +148,7 @@ body{
 }
 
 .product__quantity-selector .icon--minus{
-    top: -3px;
+    top: 2px;
 }
 
 /* Buttons */
@@ -423,7 +423,7 @@ body{
 }
 
 .navbar .user__cart-icon{
-    padding: 3rem 1rem;
+    padding: 3rem 1rem 3rem 2rem;
     cursor: pointer; 
 }
 
@@ -746,7 +746,7 @@ body{
         max-width: max-content;
         position: absolute;
         z-index: 30;
-        top: 70px;
+        top: 60px;
         right: 10px;
         left: auto;
     }

@@ -583,6 +583,8 @@ body{
 
 .overlay__image{
     position: relative;
+    overflow: hidden;
+    width: 450px;
 }
 
 .overlay__image img{
@@ -590,9 +592,15 @@ body{
     border-radius: 10px;
 }
 
+.overlay__image-container{
+    position: relative;
+    width: 450px;
+}
+
 
 #prev-btn--overlay{
     left: -15px;
+    z-index: 200;
 }
 
 #next-btn--overlay{
@@ -737,8 +745,8 @@ body{
     padding: 4rem;  
 }
 
-.cart__empty::after{
-    content: "Your cart is";
+.product--cart--empty .empty-cart-message{
+    display: block;
 }
 
 @media screen and (min-width:425px) {

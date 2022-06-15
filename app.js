@@ -306,8 +306,8 @@ addToCartBtn.addEventListener('click',()=>{
             quantities.push(parseInt(productQuantity.textContent));
         }
         
-        productQuantity.textContent = '1';
-        quantity = 1;
+        productQuantity.textContent = '0';
+        quantity = 0;
 
         //-- user-cart__total quantity display on cart as I con --//
         

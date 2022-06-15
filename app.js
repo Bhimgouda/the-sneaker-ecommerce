@@ -263,14 +263,14 @@ const addToCartBtn = document.querySelector('.btn--cart');
 const cartProducts = document.querySelector('.cart__products');
 const userCart = document.querySelector('.product--cart')
 
+const productName = document.querySelector('.product__title');
+const productPrice = document.querySelector('.product__discounted-price');
+const productQuantity = document.querySelector('.product__quantity');
 let totalCartProducts = 0
 let quantities = [null,null,null];
 let childrenId;
 
 addToCartBtn.addEventListener('click',()=>{
-    const productName = document.querySelector('.product__title');
-    const productPrice = document.querySelector('.product__discounted-price');
-    const productQuantity = document.querySelector('.product__quantity');
     let productTotal = parseInt(productPrice.textContent)*parseInt(productQuantity.textContent);
     userCart.classList.remove('product--cart--empty')
 
@@ -278,62 +278,76 @@ addToCartBtn.addEventListener('click',()=>{
     let latestProductTotal;
     
     if(totalCartProducts > 0 && cartProducts.outerHTML.includes(productName.textContent)){ 
+        console.log('runs 1')
         cartProducts.childNodes.forEach((children,index)=>{
             if (children.outerHTML === undefined) return;
             else if (children.outerHTML.includes(`${productName.textContent}`)) {
-                    latestProductQuantity = quantities[index] + parseInt(productQuantity.textContent)
-                    latestProductTotal = parseInt(productPrice.textContent)*latestProductQuantity;
-                    quantities[index] = latestProductQuantity;
-                    childrenId = children.id;
-                    children.outerHTML = `<div class='cart__product-display' id='${childrenId}'>
-                    <div class="thumbnail-and-product">
-                    <div class="icon-container cart__product-thumbnail">
-                        <img src="./images/image-product-1-thumbnail.webp" alt="" />
-                    </div>
-                    <div class="cart__product-info">
-                        <p class="cart__product-title">${productName.textContent}</p>
-                        <span class="price cart__product-price">${productPrice.textContent}</span> x
-                        <span class="cart__product-quantity">${latestProductQuantity}</span>
-                        <span class="price cart__product-total">${latestProductTotal}</span>
-                    </div>
-                    </div>
-                    <div class="cart__delete-icon">
-                    <img src="./images/icon-delete.svg" alt="">
-                    </div>
-                    </div>`
+                console.log('runs 2')
+                    if (quantities[index] === null) {
+                        console.log('runs 3')
+                        simplyCreateElement();
+                    }
+                    else {
+                        console.log('runs 4')
+                        latestProductQuantity = quantities[index] + parseInt(productQuantity.textContent)
+                        latestProductTotal = parseInt(productPrice.textContent)*latestProductQuantity;
+                        quantities[index] = latestProductQuantity;
+                        childrenId = children.id;
+                        children.outerHTML = `<div class='cart__product-display' id='${childrenId}'>
+                        <div class="thumbnail-and-product">
+                        <div class="icon-container cart__product-thumbnail">
+                            <img src="./images/image-product-1-thumbnail.webp" alt="" />
+                        </div>
+                        <div class="cart__product-info">
+                            <p class="cart__product-title">${productName.textContent}</p>
+                            <span class="price cart__product-price">${productPrice.textContent}</span> x
+                            <span class="cart__product-quantity">${latestProductQuantity}</span>
+                            <span class="price cart__product-total">${latestProductTotal}</span>
+                        </div>
+                        </div>
+                        <div class="cart__delete-icon">
+                        <img src="./images/icon-delete.svg" alt="">
+                        </div>
+                        </div>`
+                    }
             }
             
         })
     }
     
-    
     else 
-        {
-            totalCartProducts++;
-            const product = document.createElement('div');
-            product.innerHTML = `
-            <div class="thumbnail-and-product">
-            <div class="icon-container cart__product-thumbnail">
-                <img src="./images/image-product-1-thumbnail.webp" alt="" />
-            </div>
-            <div class="cart__product-info">
-                <p class="cart__product-title">${productName.textContent}</p>
-                <span class="price cart__product-price">${productPrice.textContent}</span> x
-                <span class="cart__product-quantity">${productQuantity.textContent}</span>
-                <span class="price cart__product-total">${productTotal}</span>
-            </div>
-            </div>
-            <div class="cart__delete-icon">
-            <img src="./images/icon-delete.svg" alt="">
-            </div>`
-            product.classList.add('cart__product-display');
-            product.id = `cart-product${totalCartProducts}`
-            cartProducts.appendChild(product);
+    {
+        console.log('runs 5')
+        simplyCreateElement()
+    }
 
-            /* Data storage */
-
-            quantities.push(parseInt(productQuantity.textContent));
-        }
+    function simplyCreateElement(){
+        totalCartProducts++;
+        const product = document.createElement('div');
+        product.innerHTML = `
+        <div class="thumbnail-and-product">
+        <div class="icon-container cart__product-thumbnail">
+            <img src="./images/image-product-1-thumbnail.webp" alt="" />
+        </div>
+        <div class="cart__product-info">
+            <p class="cart__product-title">${productName.textContent}</p>
+            <span class="price cart__product-price">${productPrice.textContent}</span> x
+            <span class="cart__product-quantity">${productQuantity.textContent}</span>
+            <span class="price cart__product-total">${productTotal}</span>
+        </div>
+        </div>
+        <div class="cart__delete-icon">
+        <img src="./images/icon-delete.svg" alt="">
+        </div>`
+        product.classList.add('cart__product-display');
+        product.id = `cart-product${totalCartProducts}`
+        cartProducts.appendChild(product);
+    
+        /* Data storage */
+    
+        quantities.push(parseInt(productQuantity.textContent));
+    }
+    
         productQuantity.textContent = '1';
         quantity = 1;
 })
@@ -344,18 +358,22 @@ addToCartBtn.addEventListener('click',()=>{
 productCart.addEventListener('click', (e)=>{
     let element = e.target;
     element = element.parentElement;
-    if (element.classList.contains('cart__delete-icon') && totalCartProducts === 1) {productCart.classList.add('product--cart--empty');
-    let number = childrenId.split('');
-    number = number.filter(item=>parseInt(item));
-    number = number.join('');
-    number = parseInt(number);
-    quantities.splice(number+2,1);
-
-}
-    else if (element.classList.contains('cart__delete-icon')){
-        let deleteElement = element.parentElement;
+    let deleteElement = element.parentElement;
+    if (element.classList.contains('cart__delete-icon') && totalCartProducts === 1) {
+        productCart.classList.add('product--cart--empty');
         cartProducts.removeChild(deleteElement);
         totalCartProducts--;
+    }
+    else if (element.classList.contains('cart__delete-icon')){
+        cartProducts.removeChild(deleteElement);
+        totalCartProducts--;
+    }
+    if (totalCartProducts>0) {
+        let number = childrenId.split('');
+        number = number.filter(item=>parseInt(item));
+        number = number.join('');
+        number = parseInt(number);
+        quantities[number+2] = null;
     }
 })
 

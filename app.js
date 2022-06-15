@@ -1,6 +1,19 @@
 const thumbnailImages = document.querySelectorAll('.product--main .thumbnail');
 const productImages = document.querySelectorAll('.product--main .image-slider img')
-const imageSlider = document.querySelector('.product--main .image-slider')
+const imageSlider = document.querySelector('.product--main .image-slider');
+const cartTotalQuantity = document.querySelector('.user__total-quantity');
+
+let counter=1;      // ---- for image 1 to be diplayed
+let size = productImages[0].clientWidth;
+function reportWindowSize(){
+return window.innerWidth;
+}
+
+function onscreenload(counter){
+    let size = productImages[0].clientWidth;
+    imageSlider.style.transition = 'none';
+    imageSlider.style.transform = `translateX(${-size*counter}px)`;       //----------- The mobile image resizing issue lies here ---------//
+}
 
 
 //--------------------------- Image Slider Mobile -------------------------------//
@@ -14,22 +27,20 @@ function ImageSliderMobile() {
     let nextBtn = document.querySelector('#next-btn--main');
     
     // Counter
-    let size = null;
-    let counter;
     
-    window.addEventListener('load',()=>{
-        counter = 1;
-        size = productImages[0].clientWidth;
-        imageSlider.style.transform = `translateX(${-size*counter}px)`;       //----------- The mobile image resizing issue lies here ---------//
+    window.addEventListener('load', ()=>{
+        onscreenload(1);
     })
     
     nextBtn.addEventListener('click', ()=>{
+        size = productImages[0].clientWidth;
         if(counter>=productImages.length-1) return;
         imageSlider.style.transition = 'transform 0.4s ease-in-out';
         counter++;
         imageSlider.style.transform = `translateX(${-size*counter}px)`
     })
     prevBtn.addEventListener('click', ()=>{
+        size = productImages[0].clientWidth;
         if(counter<=0) return;
         imageSlider.style.transition = 'transform 0.4s ease-in-out';
         counter--;
@@ -39,6 +50,7 @@ function ImageSliderMobile() {
     
     
     imageSlider.addEventListener('transitionend',()=>{
+        size = productImages[0].clientWidth;
         let imageId = productImages[counter].id
         if(imageId === 'last-clone'){
             imageSlider.style.transition = 'none';
@@ -71,7 +83,9 @@ thumbnailImages.forEach(thumbnail =>{
         thumbnailId = parseInt(thumbnailId.join(''));
         
         let size = productImages[0].clientWidth;
+        imageSlider.style.transition = 'none';
         imageSlider.style.transform = `translateX(${-size*thumbnailId}px)`;
+        counter = thumbnailId
     })
 })
 
@@ -194,7 +208,6 @@ const navToggler = document.querySelector('.nav__burger');
 const navLinks = document.querySelector('.nav__links')
 
 navToggler.addEventListener('click',()=>{
-    counter = imageId;
     navToggler.classList.toggle('nav__burger--close');
     navLinks.classList.toggle('nav__links--expanded');
 })
@@ -202,58 +215,6 @@ navToggler.addEventListener('click',()=>{
 
 
 
-/* User Cart */
-
-const userCartIcon = document.querySelector('.user__cart-icon');
-const productCart = document.querySelector('.product--cart');
-
-if (window.innerWidth>768){
-        userCartIcon.addEventListener('mouseover', showcart);
-        userCartIcon.addEventListener('mouseout', hidecart)
-        
-        productCart.addEventListener('mouseover', showcart);
-        productCart.addEventListener('mouseout', hidecart);
-        
-        
-        
-        function showcart(){
-            productCart.classList.remove('product--cart--hidden');
-        }
-        
-        function hidecart(){
-            productCart.classList.add('product--cart--hidden')
-        }
-    }
-    
-if(window.innerWidth<768){
-    userCartIcon.addEventListener('click',()=>{
-        productCart.classList.toggle('product--cart--hidden')
-    })
-}
-
-
-
-/* Quantity Selector */
-
-const quantityMinus = document.querySelector('.icon--minus')
-const quantityPlus = document.querySelector('.icon--plus')
-const productQuantityMain = document.querySelector('.product__quantity')
-
-let quantity = 1;
-
-quantityMinus.addEventListener('click', removeQuantity)
-quantityPlus.addEventListener('click', addQuantity)
-
-function removeQuantity(){
-    if(quantity>1){
-        quantity--;
-        productQuantityMain.textContent = `${quantity}`;
-    }
-}
-function addQuantity(){
-        quantity++;
-        productQuantityMain.textContent = `${quantity}`;
-}
 
 
 
@@ -269,6 +230,7 @@ const productQuantity = document.querySelector('.product__quantity');
 let totalCartProducts = 0
 let quantities = [null,null,null];
 let childrenId;
+let totalQuantityCounter = 0;
 
 addToCartBtn.addEventListener('click',()=>{
     let productTotal = parseInt(productPrice.textContent)*parseInt(productQuantity.textContent);
@@ -278,17 +240,13 @@ addToCartBtn.addEventListener('click',()=>{
     let latestProductTotal;
     
     if(totalCartProducts > 0 && cartProducts.outerHTML.includes(productName.textContent)){ 
-        console.log('runs 1')
         cartProducts.childNodes.forEach((children,index)=>{
             if (children.outerHTML === undefined) return;
             else if (children.outerHTML.includes(`${productName.textContent}`)) {
-                console.log('runs 2')
                     if (quantities[index] === null) {
-                        console.log('runs 3')
                         simplyCreateElement();
                     }
                     else {
-                        console.log('runs 4')
                         latestProductQuantity = quantities[index] + parseInt(productQuantity.textContent)
                         latestProductTotal = parseInt(productPrice.textContent)*latestProductQuantity;
                         quantities[index] = latestProductQuantity;
@@ -297,8 +255,8 @@ addToCartBtn.addEventListener('click',()=>{
                         <div class="thumbnail-and-product">
                         <div class="icon-container cart__product-thumbnail">
                             <img src="./images/image-product-1-thumbnail.webp" alt="" />
-                        </div>
-                        <div class="cart__product-info">
+                            </div>
+                            <div class="cart__product-info">
                             <p class="cart__product-title">${productName.textContent}</p>
                             <span class="price cart__product-price">${productPrice.textContent}</span> x
                             <span class="cart__product-quantity">${latestProductQuantity}</span>
@@ -317,7 +275,6 @@ addToCartBtn.addEventListener('click',()=>{
     
     else 
     {
-        console.log('runs 5')
         simplyCreateElement()
     }
 
@@ -328,54 +285,162 @@ addToCartBtn.addEventListener('click',()=>{
         <div class="thumbnail-and-product">
         <div class="icon-container cart__product-thumbnail">
             <img src="./images/image-product-1-thumbnail.webp" alt="" />
-        </div>
-        <div class="cart__product-info">
+            </div>
+            <div class="cart__product-info">
             <p class="cart__product-title">${productName.textContent}</p>
             <span class="price cart__product-price">${productPrice.textContent}</span> x
             <span class="cart__product-quantity">${productQuantity.textContent}</span>
             <span class="price cart__product-total">${productTotal}</span>
-        </div>
-        </div>
-        <div class="cart__delete-icon">
-        <img src="./images/icon-delete.svg" alt="">
-        </div>`
-        product.classList.add('cart__product-display');
-        product.id = `cart-product${totalCartProducts}`
-        cartProducts.appendChild(product);
-    
-        /* Data storage */
-    
-        quantities.push(parseInt(productQuantity.textContent));
-    }
-    
+            </div>
+            </div>
+            <div class="cart__delete-icon">
+            <img src="./images/icon-delete.svg" alt="">
+            </div>`
+            product.classList.add('cart__product-display');
+            product.id = `cart-product${totalCartProducts}`
+            cartProducts.appendChild(product);
+            
+            /* Data storage */
+            
+            quantities.push(parseInt(productQuantity.textContent));
+        }
+        
         productQuantity.textContent = '1';
         quantity = 1;
-})
+
+        //-- user-cart__total quantity display on cart as I con --//
+        
+        userTotalQuantityDisplay();
+    })
+    
+    
+    
+    
+    //------------------- User Cart -----------------//
+    
+    userCartFunc();
+    
+    function userCartFunc(){
+        const userCartIcon = document.querySelector('.user__cart-icon');
+        const productCart = document.querySelector('.product--cart');
+        
+    
+        if (window.innerWidth>768){
+                userCartIcon.addEventListener('mouseover', showcart);
+                userCartIcon.addEventListener('mouseout', hidecart)
+                
+                productCart.addEventListener('mouseover', showcart);
+                productCart.addEventListener('mouseout', hidecart);
+                
+                
+                
+                function showcart(){
+                    productCart.classList.remove('product--cart--hidden');
+                }
+                
+                function hidecart(){
+                    productCart.classList.add('product--cart--hidden')
+                }
+            }
+            
+        else {
+            userCartIcon.addEventListener('click',()=>{
+                productCart.classList.toggle('product--cart--hidden')
+            })
+        }
+    
+    
+    
+    
+        //--* Cart product delete button *--//
+    
+        productCart.addEventListener('click', (e)=>{
+            let element = e.target;
+            element = element.parentElement;
+            let deleteElement = element.parentElement;
+            if (element.classList.contains('cart__delete-icon') && totalCartProducts === 1) {
+                productCart.classList.add('product--cart--empty');
+                cartProducts.removeChild(deleteElement);
+                totalCartProducts--;
+                setTimeout(()=>{
+                    productCart.classList.add('product--cart--hidden');
+                },1000)
+                quantities.splice(3);
+                userTotalQuantityDisplay();
+            }
+            else if (element.classList.contains('cart__delete-icon')){
+                cartProducts.removeChild(deleteElement);
+                totalCartProducts--;
+            }
+            if (totalCartProducts>0) {
+                let number = childrenId.split('');
+                number = number.filter(item=>parseInt(item));
+                number = number.join('');
+                number = parseInt(number);
+                quantities[number+2] = null;
+            }
+            if(totalQuantityCounter === 0) cartTotalQuantity.classList.add('user__total-quantity--hidden');
+        })
+        
+    }
+    
+    function userTotalQuantityDisplay(){
+        totalQuantityCounter = quantities.reduce((add,current)=>{
+            return add + current;
+        })
+        cartTotalQuantity.classList.remove('user__total-quantity--hidden');
+        cartTotalQuantity.textContent = `${totalQuantityCounter}`;
+
+    }
+    
+    
+    /* Quantity Selector */
+    
+    const quantityMinus = document.querySelector('.icon--minus')
+    const quantityPlus = document.querySelector('.icon--plus')
+    const productQuantityMain = document.querySelector('.product__quantity')
+    
+    let quantity = 1;
+    
+    quantityMinus.addEventListener('click', removeQuantity)
+    quantityPlus.addEventListener('click', addQuantity)
+    
+    function removeQuantity(){
+        if(quantity>1){
+            quantity--;
+            productQuantityMain.textContent = `${quantity}`;
+        }
+    }
+    function addQuantity(){
+            quantity++;
+            productQuantityMain.textContent = `${quantity}`;
+    }
 
 
-/* Cart product delete button */
+/* If window resizes */
 
-productCart.addEventListener('click', (e)=>{
-    let element = e.target;
-    element = element.parentElement;
-    let deleteElement = element.parentElement;
-    if (element.classList.contains('cart__delete-icon') && totalCartProducts === 1) {
-        productCart.classList.add('product--cart--empty');
-        cartProducts.removeChild(deleteElement);
-        totalCartProducts--;
-    }
-    else if (element.classList.contains('cart__delete-icon')){
-        cartProducts.removeChild(deleteElement);
-        totalCartProducts--;
-    }
-    if (totalCartProducts>0) {
-        let number = childrenId.split('');
-        number = number.filter(item=>parseInt(item));
-        number = number.join('');
-        number = parseInt(number);
-        quantities[number+2] = null;
-    }
-})
+onWindowResize();
+
+function onWindowResize(){
+    const overlay = document.querySelector('.product--overlay');
+    
+    window.addEventListener('resize',()=>{
+        //-- For image width resize --//
+        onscreenload(counter);
+        productImages.forEach(image=>{
+            image.style.width = '100%';
+        })                   
+        windowSize = reportWindowSize();
+
+        //-- For Overlay hide --//
+        if(windowSize>768){
+            overlay.classList.add('product--overlay--hidden');
+        }
+    })
+}
+
+
+
 
 
 

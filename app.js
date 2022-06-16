@@ -368,6 +368,10 @@ addToCartBtn.addEventListener('click',()=>{
                 userTotalQuantityDisplay();
                 totalCartProducts--;
             }
+
+            else{
+                cartTotalQuantity.classList.add('user__total-quantity--hidden');
+            }
             
             if(totalQuantityCounter === 0 || totalQuantityCounter === NaN) cartTotalQuantity.classList.add('user__total-quantity--hidden');
         })

@@ -347,29 +347,29 @@ addToCartBtn.addEventListener('click',()=>{
     
         productCart.addEventListener('click', (e)=>{
             let element = e.target;
+
+            /* Targeting added to cart product */
             element = element.parentElement;
-            let deleteElement = element.parentElement;
+            let deleteProduct = element.parentElement;
             if (element.classList.contains('cart__delete-icon') && totalCartProducts === 1) {
                 productCart.classList.add('product--cart--empty');
-                cartProducts.removeChild(deleteElement);
-                totalCartProducts--;
+                cartProducts.removeChild(deleteProduct);
+                totalCartProducts=0;
+                totalQuantityCounter = 0
                 setTimeout(()=>{
                     productCart.classList.add('product--cart--hidden');
                 },1000)
-                userTotalQuantityDisplay();
+
+                
             }
             else if (element.classList.contains('cart__delete-icon')){
-                cartProducts.removeChild(deleteElement);
+                let deleteQuantity = parseInt(deleteProduct.childNodes[1].childNodes[3].childNodes[5])
+                totalQuantityCounter -= deleteQuantity;
+                userTotalQuantityDisplay();
                 totalCartProducts--;
             }
-            if (totalCartProducts>0) {
-                let number = childrenId.split('');
-                number = number.filter(item=>parseInt(item));
-                number = number.join('');
-                number = parseInt(number);
-                quantities[number+2] = null;
-            }
-            if(totalQuantityCounter === 0) cartTotalQuantity.classList.add('user__total-quantity--hidden');
+            
+            if(totalQuantityCounter === 0 || totalQuantityCounter === NaN) cartTotalQuantity.classList.add('user__total-quantity--hidden');
         })
         
    

@@ -351,7 +351,8 @@ addToCartBtn.addEventListener('click',()=>{
             /* Targeting added to cart product */
             element = element.parentElement;
             let deleteProduct = element.parentElement;
-            if (element.classList.contains('cart__delete-icon') && totalCartProducts === 1) {
+            if (element.classList.contains('cart__delete-icon')){
+                if (totalCartProducts === 1) {
                 productCart.classList.add('product--cart--empty');
                 cartProducts.removeChild(deleteProduct);
                 totalCartProducts=0;
@@ -359,22 +360,16 @@ addToCartBtn.addEventListener('click',()=>{
                 setTimeout(()=>{
                     productCart.classList.add('product--cart--hidden');
                 },1000)
-
-                
             }
-            else if (element.classList.contains('cart__delete-icon')){
+                else{
                 let deleteQuantity = parseInt(deleteProduct.childNodes[1].childNodes[3].childNodes[5])
                 totalQuantityCounter -= deleteQuantity;
                 userTotalQuantityDisplay();
                 totalCartProducts--;
             }
 
-            else{
-                cartTotalQuantity.classList.add('user__total-quantity--hidden');
-            }
             
-            if(totalQuantityCounter === 0 || totalQuantityCounter === NaN) cartTotalQuantity.classList.add('user__total-quantity--hidden');
-        })
+            if(totalQuantityCounter === 0) cartTotalQuantity.classList.add('user__total-quantity--hidden');
         
    
     }

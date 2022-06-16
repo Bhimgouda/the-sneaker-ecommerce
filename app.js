@@ -352,7 +352,6 @@ addToCartBtn.addEventListener('click',()=>{
             element = element.parentElement;
             let deleteProduct = element.parentElement;
             if (element.classList.contains('cart__delete-icon')){
-                if (totalCartProducts === 1) {
                 productCart.classList.add('product--cart--empty');
                 cartProducts.removeChild(deleteProduct);
                 totalCartProducts=0;
@@ -360,16 +359,9 @@ addToCartBtn.addEventListener('click',()=>{
                 setTimeout(()=>{
                     productCart.classList.add('product--cart--hidden');
                 },1000)
-            }
-                else{
-                let deleteQuantity = parseInt(deleteProduct.childNodes[1].childNodes[3].childNodes[5])
-                totalQuantityCounter -= deleteQuantity;
-                userTotalQuantityDisplay();
-                totalCartProducts--;
-            }
-
-            
+        }
             if(totalQuantityCounter === 0) cartTotalQuantity.classList.add('user__total-quantity--hidden');
+        })
         
    
     }

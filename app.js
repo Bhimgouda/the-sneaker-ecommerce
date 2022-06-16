@@ -219,100 +219,90 @@ navToggler.addEventListener('click',()=>{
 
 
 /* Add to cart section */
-
 const addToCartBtn = document.querySelector('.btn--cart');
 const cartProducts = document.querySelector('.cart__products');
 const userCart = document.querySelector('.product--cart')
 
-const productName = document.querySelector('.product__title');
-const productPrice = document.querySelector('.product__discounted-price');
-const productQuantity = document.querySelector('.product__quantity');
-let totalCartProducts = 0
-let quantities = [null,null,null];
+/* product Display in cart */
+const productDisplay = document.querySelector('.cart__product-display');
+
+/* From main page */
+const productName = document.querySelector('.product--main .product__title')
+const productPrice = document.querySelector('.product--main .product__discounted-price')
+const productQuantity = document.querySelector('.product--main .product__quantity');
+const productThumbnail = document.querySelector('.product--main #thumbnail-main-1');
+
+/* From hardcoded dummy usercart product display */
+const cartProductName = document.querySelector('.cart__product-title')
+const cartProductPrice = document.querySelector('.cart__product-price')
+const cartProductQuantity = document.querySelector('.cart__product-quantity')
+const cartProductThumbnail = document.querySelector('.cart__product-thumbnail img');
+const cartProductTotal = document.querySelector('.cart__product-total')
+
+
+let totalCartProducts = 0;
 let childrenId;
 let totalQuantityCounter = 0;
 
 addToCartBtn.addEventListener('click',()=>{
-    let productTotal = parseInt(productPrice.textContent)*parseInt(productQuantity.textContent);
+    totalQuantityCounter+=parseInt(productQuantity.textContent);
+    /* Firstly hide the hardcorded dummy display */
+    productDisplay.classList.add('cart__product-display--hidden');
     userCart.classList.remove('product--cart--empty')
-
-    let latestProductQuantity;
-    let latestProductTotal;
-    
-    if(totalCartProducts > 0 && cartProducts.outerHTML.includes(productName.textContent)){ 
-        cartProducts.childNodes.forEach((children,index)=>{
-            if (children.outerHTML === undefined) return;
-            else if (children.outerHTML.includes(`${productName.textContent}`)) {
-                    if (quantities[index] === null) {
-                        simplyCreateElement();
+    const cartProductNameAll = document.querySelectorAll('.cart__product-title');
+    let latestTotalQuantity;
+    if(totalCartProducts > 0){
+                            for (index=0;index<cartProductNameAll.length;index++){
+                                if (cartProductNameAll[index].textContent === productName.textContent){
+                                    if(cartProductNameAll[index].parentElement.parentElement.parentElement.classList.contains('added-to-cart')){
+                                    let productInfo = cartProductNameAll[index].parentElement;
+                                    let productChildrenInfo = productInfo.childNodes;
+                                    productChildrenInfo.forEach((childInfos,i)=>{
+                                        if (childInfos.classList === undefined) return;
+                                        if (childInfos.classList.contains('cart__product-quantity')) {
+                                            latestTotalQuantity = parseInt(productChildrenInfo[i].textContent) + parseInt(productQuantity.textContent);
+                                            productChildrenInfo[i].textContent = `${latestTotalQuantity}`
+                                        }
+                                        if (childInfos.classList.contains('cart__product-total')){
+                                            productChildrenInfo[i].textContent = `${parseInt(productPrice.textContent)*latestTotalQuantity}`;
+                                        }
+                            })
+                            }
+                        }
                     }
-                    else {
-                        let thumbnailImage = document.querySelector('#thumbnail-main-1');
-                        latestProductQuantity = quantities[index] + parseInt(productQuantity.textContent)
-                        latestProductTotal = parseInt(productPrice.textContent)*latestProductQuantity;
-                        quantities[index] = latestProductQuantity;
-                        childrenId = children.id;
-                        children.outerHTML = `<div class='cart__product-display' id='${childrenId}'>
-                        <div class="thumbnail-and-product">
-                        <div class="icon-container cart__product-thumbnail">
-                        <img src="./images/image-product-1-thumbnail.webp" alt="" />
-                        </div>
-                        <div class="cart__product-info">
-                        <p class="cart__product-title">${productName.textContent}</p>
-                        <span class="price cart__product-price">${productPrice.textContent}</span> x
-                        <span class="cart__product-quantity">${latestProductQuantity}</span>
-                        <span class="price cart__product-total">${latestProductTotal}</span>
-                        </div>
-                        </div>
-                        <div class="cart__delete-icon">
-                        <svg width="14" height="16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path d="M0 2.625V1.75C0 1.334.334 1 .75 1h3.5l.294-.584A.741.741 0 0 1 5.213 0h3.571a.75.75 0 0 1 .672.416L9.75 1h3.5c.416 0 .75.334.75.75v.875a.376.376 0 0 1-.375.375H.375A.376.376 0 0 1 0 2.625Zm13 1.75V14.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 1 14.5V4.375C1 4.169 1.169 4 1.375 4h11.25c.206 0 .375.169.375.375ZM4.5 6.5c0-.275-.225-.5-.5-.5s-.5.225-.5.5v7c0 .275.225.5.5.5s.5-.225.5-.5v-7Zm3 0c0-.275-.225-.5-.5-.5s-.5.225-.5.5v7c0 .275.225.5.5.5s.5-.225.5-.5v-7Zm3 0c0-.275-.225-.5-.5-.5s-.5.225-.5.5v7c0 .275.225.5.5.5s.5-.225.5-.5v-7Z" id="a"/></defs><use fill="#C3CAD9" fill-rule="nonzero" xlink:href="#a"/></svg>
-                        </div>
-                        </div>`
-                    }
-            }
+    }
             
-        })
+    else {
+        simplyCreateElement();
     }
-    
-    else 
-    {
-        simplyCreateElement()
-    }
+
+    userTotalQuantityDisplay();
 
     function simplyCreateElement(){
-        totalCartProducts++;
-        const product = document.createElement('div');
-        product.innerHTML = `
-        <div class="thumbnail-and-product">
-        <div class="icon-container cart__product-thumbnail">
-        <img src="./images/image-product-1-thumbnail.webp" alt="" />
-            </div>
-            <div class="cart__product-info">
-            <p class="cart__product-title">${productName.textContent}</p>
-            <span class="price cart__product-price">${productPrice.textContent}</span> x
-            <span class="cart__product-quantity">${productQuantity.textContent}</span>
-            <span class="price cart__product-total">${productTotal}</span>
-            </div>
-            </div>
-            <div class="cart__delete-icon">
-            <svg width="14" height="16" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path d="M0 2.625V1.75C0 1.334.334 1 .75 1h3.5l.294-.584A.741.741 0 0 1 5.213 0h3.571a.75.75 0 0 1 .672.416L9.75 1h3.5c.416 0 .75.334.75.75v.875a.376.376 0 0 1-.375.375H.375A.376.376 0 0 1 0 2.625Zm13 1.75V14.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 1 14.5V4.375C1 4.169 1.169 4 1.375 4h11.25c.206 0 .375.169.375.375ZM4.5 6.5c0-.275-.225-.5-.5-.5s-.5.225-.5.5v7c0 .275.225.5.5.5s.5-.225.5-.5v-7Zm3 0c0-.275-.225-.5-.5-.5s-.5.225-.5.5v7c0 .275.225.5.5.5s.5-.225.5-.5v-7Zm3 0c0-.275-.225-.5-.5-.5s-.5.225-.5.5v7c0 .275.225.5.5.5s.5-.225.5-.5v-7Z" id="a"/></defs><use fill="#C3CAD9" fill-rule="nonzero" xlink:href="#a"/></svg>
-            </div>`
-            product.classList.add('cart__product-display');
-            product.id = `cart-product${totalCartProducts}`
-            cartProducts.appendChild(product);
-            
-            /* Data storage */
-            
-            quantities.push(parseInt(productQuantity.textContent));
-        }
-        
-        productQuantity.textContent = '0';
-        quantity = 0;
 
-        //-- user-cart__total quantity display on cart as I con --//
+        /* Firstly we should edit our hardcoded values inside cart__ product-display and then add it to newly created product */
+        cartProductName.textContent = productName.textContent;
+        cartProductPrice.textContent = productPrice.textContent;
+        cartProductQuantity.textContent = productQuantity.textContent;
+        cartProductThumbnail.src = productThumbnail.src;
+        cartProductTotal.textContent = parseInt(productPrice.textContent)*parseInt(productQuantity.textContent);
         
-        userTotalQuantityDisplay();
-    })
+        createCartProduct();
+        productDisplay.remove
+        
+    }
+    function createCartProduct() {const product = document.createElement('div');
+        product.classList = 'cart__product-display added-to-cart';
+        product.innerHTML = productDisplay.innerHTML;
+        product.id = `cart-product${totalCartProducts}`
+        cartProducts.appendChild(product);
+
+    }
+    totalCartProducts++;
+    productQuantity.textContent = '0';
+
+    userTotalQuantityDisplay()
+})
     
     
     
@@ -366,7 +356,6 @@ addToCartBtn.addEventListener('click',()=>{
                 setTimeout(()=>{
                     productCart.classList.add('product--cart--hidden');
                 },1000)
-                quantities.splice(3);
                 userTotalQuantityDisplay();
             }
             else if (element.classList.contains('cart__delete-icon')){
@@ -383,12 +372,10 @@ addToCartBtn.addEventListener('click',()=>{
             if(totalQuantityCounter === 0) cartTotalQuantity.classList.add('user__total-quantity--hidden');
         })
         
+   
     }
     
     function userTotalQuantityDisplay(){
-        totalQuantityCounter = quantities.reduce((add,current)=>{
-            return add + current;
-        })
         cartTotalQuantity.classList.remove('user__total-quantity--hidden');
         cartTotalQuantity.textContent = `${totalQuantityCounter}`;
 
@@ -399,22 +386,23 @@ addToCartBtn.addEventListener('click',()=>{
     
     const quantityMinus = document.querySelector('.icon--minus')
     const quantityPlus = document.querySelector('.icon--plus')
-    const productQuantityMain = document.querySelector('.product__quantity')
+   
     
-    let quantity = 1;
     
     quantityMinus.addEventListener('click', removeQuantity)
     quantityPlus.addEventListener('click', addQuantity)
     
     function removeQuantity(){
+        let quantity = parseInt(productQuantity.textContent);
         if(quantity>1){
             quantity--;
-            productQuantityMain.textContent = `${quantity}`;
+            productQuantity.textContent = `${quantity}`;
         }
     }
     function addQuantity(){
-            quantity++;
-            productQuantityMain.textContent = `${quantity}`;
+        let quantity = parseInt(productQuantity.textContent);
+        quantity++;
+        productQuantity.textContent = `${quantity}`;
     }
 
 

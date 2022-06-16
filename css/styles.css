@@ -534,7 +534,7 @@ img{
     cursor: pointer;
     padding: 3rem 0;
     margin: 0 1.5rem;
-    background-image: linear-gradient(hsl(26, 100%, 55%), hsl(26, 100%, 55%)~);
+    background-image: linear-gradient(hsl(26, 100%, 55%), hsl(26, 100%, 55%));
     background-size: 0 5px, auto;
     background-repeat: no-repeat;
     background-position: center bottom;

@@ -14,20 +14,24 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <Navbar />
-        <Switch>
-          <Route path="/product/:id" component={Product} />
-          <Route path="/collections" component={Collection} />
-          <Route path="/men" component={Store} />
-          <Route path="/women" component={Store} />
-          <Route path="/store" component={Store} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/about" component={About} />
-          <Route path="/not-found" component={NotFound} />
-          <Route path="/product/:id" component={Product} />
-          <Redirect exact from="/" to="/store" />
-          <Redirect to="/not-found" />
-        </Switch>
+        <header>
+          <Navbar />
+        </header>
+        <main>
+          <Switch>
+            <Route path="/product/:id" component={Product} />
+            <Route path="/collections" component={Collection} />
+            <Route path="/men" component={Store} />
+            <Route path="/women" component={Store} />
+            <Route path="/store" component={Store} />
+            <Route path="/contact" component={Contact} />
+            <Route path="/about" component={About} />
+            <Route path="/not-found" component={NotFound} />
+            <Route path="/product/:id" component={Product} />
+            <Redirect exact from="/" to="/store" />
+            <Redirect to="/not-found" />
+          </Switch>
+        </main>
       </React.Fragment>
     );
   }

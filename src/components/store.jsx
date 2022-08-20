@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import productsData from "../products.json";
 import { Link } from "react-router-dom";
+import ProductInStore from "./productsInStore";
 
 const Store = () => {
   const [products, setProducts] = useState([]);
@@ -10,15 +11,12 @@ const Store = () => {
     setProducts(productsInStock);
   }, []);
   return (
-    <div>
-      <h1>store</h1>
-      {products.map((product, index) => {
-        return (
-          <div key={index}>
-            <Link to={`product/${product._id}`}>Shoes{index}</Link>
-          </div>
-        );
-      })}
+    <div className="store__product-gallery container">
+      {products.map((product) => (
+        <Link to={`product/${product._id}`}>
+          <ProductInStore product={product} />
+        </Link>
+      ))}
     </div>
   );
 };

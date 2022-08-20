@@ -1,6 +1,7 @@
 import React from "react";
 
 const ProductInfo = ({ desc, name, companyName }) => {
+  console.log(companyName);
   return (
     <div className="product__info">
       <p className="product__company">{companyName}</p>

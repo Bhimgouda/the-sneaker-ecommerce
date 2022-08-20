@@ -19,7 +19,7 @@ const Navbar = () => {
       <div className="nav__header">
         <Toggler toggleValue={toggleValue} onToggle={handleToggle} />
         <Logo />
-        <NavLinks toggleValue={toggleValue} />
+        <NavLinks closeNavbar={handleToggle} toggleValue={toggleValue} />
       </div>
       <UserSection />
       <ProductCart />

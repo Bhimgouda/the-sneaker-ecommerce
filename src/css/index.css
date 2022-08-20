@@ -560,6 +560,8 @@ img{
 
 
 
+
+
 @media screen and (max-width:767px) {
     
     .navbar{
@@ -569,16 +571,17 @@ img{
     .nav__links{
         position: absolute;
         flex-direction: column;
-        height: calc(100vh - 62.65px);
-        top: 62.65px;
+        height: calc(100vh - 70.65px);
+        top: 70.65px;
         left: -300px;
         font-weight: bold;
         color: black;
         z-index: 20;
         background-color: #fff;
         justify-content: flex-start;
-        width: 40vw;
-        padding: 0rem 2rem ;
+        width: 50vw;
+        row-gap: 5%;
+        padding: 2rem 2rem ;
         transition: all 0.3s ease-in-out;
     }
 
@@ -634,8 +637,6 @@ img{
         margin: 1rem 0;
     }
 }
-
-
 
 @media screen and (min-width:1024px) {
     .nav__links a{

@@ -1,0 +1,44 @@
+[
+    {
+        "_id": "p001",
+        "name":"Fall Limited Edition Sneakers",
+        "companyName:": "SNEAKER COMPANY",
+        "desc":"These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.",
+        "originalPrice": 250,
+        "discountedPrice": 125,
+        "discountPercentage": 20,
+        "images" : [
+            "https://sneaker-company-product.netlify.app/image-product-1.eda6adf7.webp",
+            "https://sneaker-company-product.netlify.app/image-product-2.e7aa5880.webp",
+            "https://sneaker-company-product.netlify.app/image-product-3.8a45a281.webp",
+            "https://sneaker-company-product.netlify.app/image-product-4.58b2b520.webp"
+        ],
+        "thumbnailImages" : [
+            "https://sneaker-company-product.netlify.app/image-product-1-thumbnail.c483b6a8.webp",
+            "https://sneaker-company-product.netlify.app/image-product-2-thumbnail.31f9d220.webp",
+            "https://sneaker-company-product.netlify.app/image-product-3-thumbnail.b00eff43.webp",
+            "https://sneaker-company-product.netlify.app/image-product-4-thumbnail.a28295e7.webp"
+        ]
+    },
+    {
+        "_id": "p002",
+        "name":"All Star Chuck Taylor",
+        "companyName:": "CONVERSE",
+        "desc":"These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.",
+        "originalPrice": 450,
+        "discountedPrice": 770,
+        "discountPercentage": 20,
+        "images" : [
+            "https://sneaker-company-product.netlify.app/image-product-1.eda6adf7.webp",
+            "https://sneaker-company-product.netlify.app/image-product-2.e7aa5880.webp",
+            "https://sneaker-company-product.netlify.app/image-product-3.8a45a281.webp",
+            "https://sneaker-company-product.netlify.app/image-product-4.58b2b520.webp"
+        ],
+        "thumbnailImages" : [
+            "https://sneaker-company-product.netlify.app/image-product-1-thumbnail.c483b6a8.webp",
+            "https://sneaker-company-product.netlify.app/image-product-2-thumbnail.31f9d220.webp",
+            "https://sneaker-company-product.netlify.app/image-product-3-thumbnail.b00eff43.webp",
+            "https://sneaker-company-product.netlify.app/image-product-4-thumbnail.a28295e7.webp"
+        ]
+    }
+]

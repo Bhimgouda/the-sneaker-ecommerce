@@ -12,7 +12,7 @@ class FakeProductGenerator {
     this._id = id;
     this.name = name;
     this.companyName = companyName;
-    this.origianlPrice = origianlPrice;
+    this.originalPrice = origianlPrice;
     this.discountedPrice = discountedPrice;
     this.category = category;
     this.images = images;
@@ -24,52 +24,52 @@ class FakeProductGenerator {
 
 const totalProducts = 12;
 let names = [
-  "Fall Limited Edition Sneakers",
+  "Fall Limited Editions",
   "ASTIR THEBE MAGUGU",
   "AIR JORDAN 12 STEALTH",
-  "AIR JORDAN 12 STEALTH",
-  "AIR JORDAN 12 STEALTH",
-  "AIR JORDAN 12 STEALTH",
-  "AIR JORDAN 12 STEALTH",
-  "AIR JORDAN 12 STEALTH",
-  "AIR JORDAN 12 STEALTH",
-  "AIR JORDAN 12 STEALTH",
-  "AIR JORDAN 12 STEALTH",
-  "AIR JORDAN 12 STEALTH",
+  "LIGHT STAR SNEAKERS",
+  "All Star Chuck Taylor",
+  "Cloud 9 Lights",
+  "Stripe High Edition",
+  "Everyday Sneakers",
+  "Sky Runner Sneakers",
+  "Black Cloud Nine Edition",
+  "Night Star Sneakers",
+  "Cloud 9 Lights",
 ];
 let companyNames = [
   "SNEAKER COMPANY",
   "adidas originals",
   "Nike",
-  "SNEAKER COMPANY",
-  "adidas originals",
-  "Nike",
-  "SNEAKER COMPANY",
-  "adidas originals",
-  "Nike",
-  "SNEAKER COMPANY",
-  "adidas originals",
-  "Nike",
-];
-let origianlPrices = [
-  250, 162, 450, 250, 162, 450, 250, 162, 450, 250, 162, 450,
+  "NIKE",
+  "CONVERSE",
+  "Adidas",
+  "nike",
+  "lulu",
+  "riders",
+  "nike",
+  "nike",
+  "addidas",
 ];
 let discountedPrices = [
-  125, 182, 900, 125, 182, 900, 125, 182, 900, 125, 182, 900,
+  125, 162, 450, 162, 228, 195, 175, 162, 450, 150, 162, 450,
+];
+let originalPrices = [
+  250, 182, 900, 180, 300, 290, 220, 182, 900, 225, 182, 900,
 ];
 let categories = [
   "men",
+  "women",
+  "men",
+  "women",
   "men",
   "men",
+  "women",
+  "women",
   "men",
   "men",
-  "men",
-  "men",
-  "men",
-  "men",
-  "men",
-  "men",
-  "men",
+  "women",
+  "women",
 ];
 let product1Images = [
   [
@@ -90,15 +90,60 @@ let product1Images = [
     "https://i.ibb.co/z4D94hs/shoe-1-3.webp",
     "https://i.ibb.co/60XwL2M/shoe-1-4.webp",
   ],
-  ["https://ibb.co/Ms893mq"],
-  ["https://i.ibb.co/cyN2Wq9/shoe-5-1.jpg"],
-  ["https://i.ibb.co/2dczJnY/shoe-6-1.jpg"],
-  ["https://i.ibb.co/cLRtShr/shoe-7-1.jpg"],
-  ["https://i.ibb.co/KrfSb1z/shoe-8-1.jpg"],
-  ["https://i.ibb.co/njSBCw2/shoe-9-1.jpg"],
-  ["https://i.ibb.co/vYxHWWh/shoe-10-1.jpg"],
-  ["https://i.ibb.co/BrmXVqh/shoe-11-1.jpg"],
-  ["https://i.ibb.co/2dczJnY/shoe-6-1.jpg"],
+  [
+    "https://i.ibb.co/R9h7VqL/image-product-8-mrpszr.jpg",
+    "https://i.ibb.co/R9h7VqL/image-product-8-mrpszr.jpg",
+    "https://i.ibb.co/R9h7VqL/image-product-8-mrpszr.jpg",
+    "https://i.ibb.co/R9h7VqL/image-product-8-mrpszr.jpg",
+  ],
+  [
+    "https://i.ibb.co/cyN2Wq9/shoe-5-1.jpg",
+    "https://i.ibb.co/cyN2Wq9/shoe-5-1.jpg",
+    "https://i.ibb.co/cyN2Wq9/shoe-5-1.jpg",
+    "https://i.ibb.co/cyN2Wq9/shoe-5-1.jpg",
+  ],
+  [
+    "https://i.ibb.co/2dczJnY/shoe-6-1.jpg",
+    "https://i.ibb.co/2dczJnY/shoe-6-1.jpg",
+    "https://i.ibb.co/2dczJnY/shoe-6-1.jpg",
+    "https://i.ibb.co/2dczJnY/shoe-6-1.jpg",
+  ],
+  [
+    "https://i.ibb.co/cLRtShr/shoe-7-1.jpg",
+    "https://i.ibb.co/cLRtShr/shoe-7-1.jpg",
+    "https://i.ibb.co/cLRtShr/shoe-7-1.jpg",
+    "https://i.ibb.co/cLRtShr/shoe-7-1.jpg",
+  ],
+  [
+    "https://i.ibb.co/KrfSb1z/shoe-8-1.jpg",
+    "https://i.ibb.co/KrfSb1z/shoe-8-1.jpg",
+    "https://i.ibb.co/KrfSb1z/shoe-8-1.jpg",
+    "https://i.ibb.co/KrfSb1z/shoe-8-1.jpg",
+  ],
+  [
+    "https://i.ibb.co/njSBCw2/shoe-9-1.jpg",
+    "https://i.ibb.co/njSBCw2/shoe-9-1.jpg",
+    "https://i.ibb.co/njSBCw2/shoe-9-1.jpg",
+    "https://i.ibb.co/njSBCw2/shoe-9-1.jpg",
+  ],
+  [
+    "https://i.ibb.co/vYxHWWh/shoe-10-1.jpg",
+    "https://i.ibb.co/vYxHWWh/shoe-10-1.jpg",
+    "https://i.ibb.co/vYxHWWh/shoe-10-1.jpg",
+    "https://i.ibb.co/vYxHWWh/shoe-10-1.jpg",
+  ],
+  [
+    "https://i.ibb.co/BrmXVqh/shoe-11-1.jpg",
+    "https://i.ibb.co/BrmXVqh/shoe-11-1.jpg",
+    "https://i.ibb.co/BrmXVqh/shoe-11-1.jpg",
+    "https://i.ibb.co/BrmXVqh/shoe-11-1.jpg",
+  ],
+  [
+    "https://i.ibb.co/2dczJnY/shoe-6-1.jpg",
+    "https://i.ibb.co/2dczJnY/shoe-6-1.jpg",
+    "https://i.ibb.co/2dczJnY/shoe-6-1.jpg",
+    "https://i.ibb.co/2dczJnY/shoe-6-1.jpg",
+  ],
 ];
 let product1Thumbnail = [
   [
@@ -119,15 +164,60 @@ let product1Thumbnail = [
     "https://i.ibb.co/RcHQGc6/shoe-1-s3.webp",
     "https://i.ibb.co/tXGs96W/shoe-1-s4.webp",
   ],
-  ["https://ibb.co/Ms893mq"],
-  ["https://i.ibb.co/cyN2Wq9/shoe-5-1.jpg"],
-  ["https://i.ibb.co/2dczJnY/shoe-6-1.jpg"],
-  ["https://i.ibb.co/cLRtShr/shoe-7-1.jpg"],
-  ["https://i.ibb.co/KrfSb1z/shoe-8-1.jpg"],
-  ["https://i.ibb.co/njSBCw2/shoe-9-1.jpg"],
-  ["https://i.ibb.co/vYxHWWh/shoe-10-1.jpg"],
-  ["https://i.ibb.co/BrmXVqh/shoe-11-1.jpg"],
-  ["https://i.ibb.co/2dczJnY/shoe-6-1.jpg"],
+  [
+    "https://i.ibb.co/R9h7VqL/image-product-8-mrpszr.jpg",
+    "https://i.ibb.co/R9h7VqL/image-product-8-mrpszr.jpg",
+    "https://i.ibb.co/R9h7VqL/image-product-8-mrpszr.jpg",
+    "https://i.ibb.co/R9h7VqL/image-product-8-mrpszr.jpg",
+  ],
+  [
+    "https://i.ibb.co/cyN2Wq9/shoe-5-1.jpg",
+    "https://i.ibb.co/cyN2Wq9/shoe-5-1.jpg",
+    "https://i.ibb.co/cyN2Wq9/shoe-5-1.jpg",
+    "https://i.ibb.co/cyN2Wq9/shoe-5-1.jpg",
+  ],
+  [
+    "https://i.ibb.co/2dczJnY/shoe-6-1.jpg",
+    "https://i.ibb.co/2dczJnY/shoe-6-1.jpg",
+    "https://i.ibb.co/2dczJnY/shoe-6-1.jpg",
+    "https://i.ibb.co/2dczJnY/shoe-6-1.jpg",
+  ],
+  [
+    "https://i.ibb.co/cLRtShr/shoe-7-1.jpg",
+    "https://i.ibb.co/cLRtShr/shoe-7-1.jpg",
+    "https://i.ibb.co/cLRtShr/shoe-7-1.jpg",
+    "https://i.ibb.co/cLRtShr/shoe-7-1.jpg",
+  ],
+  [
+    "https://i.ibb.co/KrfSb1z/shoe-8-1.jpg",
+    "https://i.ibb.co/KrfSb1z/shoe-8-1.jpg",
+    "https://i.ibb.co/KrfSb1z/shoe-8-1.jpg",
+    "https://i.ibb.co/KrfSb1z/shoe-8-1.jpg",
+  ],
+  [
+    "https://i.ibb.co/njSBCw2/shoe-9-1.jpg",
+    "https://i.ibb.co/njSBCw2/shoe-9-1.jpg",
+    "https://i.ibb.co/njSBCw2/shoe-9-1.jpg",
+    "https://i.ibb.co/njSBCw2/shoe-9-1.jpg",
+  ],
+  [
+    "https://i.ibb.co/vYxHWWh/shoe-10-1.jpg",
+    "https://i.ibb.co/vYxHWWh/shoe-10-1.jpg",
+    "https://i.ibb.co/vYxHWWh/shoe-10-1.jpg",
+    "https://i.ibb.co/vYxHWWh/shoe-10-1.jpg",
+  ],
+  [
+    "https://i.ibb.co/BrmXVqh/shoe-11-1.jpg",
+    "https://i.ibb.co/BrmXVqh/shoe-11-1.jpg",
+    "https://i.ibb.co/BrmXVqh/shoe-11-1.jpg",
+    "https://i.ibb.co/BrmXVqh/shoe-11-1.jpg",
+  ],
+  [
+    "https://i.ibb.co/2dczJnY/shoe-6-1.jpg",
+    "https://i.ibb.co/2dczJnY/shoe-6-1.jpg",
+    "https://i.ibb.co/2dczJnY/shoe-6-1.jpg",
+    "https://i.ibb.co/2dczJnY/shoe-6-1.jpg",
+  ],
 ];
 
 let productsData = [];
@@ -137,7 +227,7 @@ for (let i = 0; i < totalProducts; i++) {
     `p00${i + 1}`,
     names[i],
     companyNames[i],
-    origianlPrices[i],
+    originalPrices[i],
     discountedPrices[i],
     categories[i],
     product1Images[i],

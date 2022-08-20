@@ -85,7 +85,7 @@ img{
     background-color: var(--color-pale-orange);
     border-radius: 6px;
     font-weight: 700;
-    margin: 0rem 1rem;
+    margin: 1rem 1rem;
 }
 
 .product__original-price{
@@ -141,7 +141,8 @@ img{
     }
 
     .product__original-price{
-        margin-top: 0.7rem;
+        margin-top: 2rem;
+        
     }
 }
 
@@ -911,9 +912,17 @@ img{
 .store__product-gallery{
     max-width: 900px;
     margin-top: 80px;
+    margin-bottom: 50px;
     column-gap: 2%;
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(2,1fr);
+}
+
+
+@media screen and (min-width:800px) {
+    .store__product-gallery{
+        grid-template-columns: repeat(3,1fr);
+    }
 }
 
 
@@ -925,7 +934,8 @@ img{
     flex-wrap: wrap;
     column-gap: 5%;
     justify-content: center;
-    margin-top: 80px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .collection__category{

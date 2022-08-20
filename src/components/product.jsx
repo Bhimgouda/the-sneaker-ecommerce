@@ -4,13 +4,14 @@ import ProductThumbnails from "./common/productThumbnails";
 import PricingPanel from "./common/pricingPanel";
 import ProductInfo from "./common/productInfo";
 import AddToCart from "./common/addToCart";
-import products from "../products.json";
-
+import { getProducts } from "../fakeDatabase";
 const Product = (props) => {
   const productId = props.match.params.id;
-  const product = products.find((product) => product._id === productId);
+  const product = [...getProducts()].find(
+    (product) => product._id === productId
+  );
 
-  const { name, companyName, desc } = product;
+  const { name, companyName, desc, originalPrice, discountedPrice } = product;
 
   return (
     <section className="product--main container">
@@ -20,7 +21,10 @@ const Product = (props) => {
       </div>
       <div className="product__body">
         <ProductInfo name={name} desc={desc} companyName={companyName} />
-        <PricingPanel />
+        <PricingPanel
+          originalPrice={originalPrice}
+          discountedPrice={discountedPrice}
+        />
         <AddToCart />
       </div>
     </section>

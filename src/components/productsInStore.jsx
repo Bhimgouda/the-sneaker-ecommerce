@@ -3,8 +3,7 @@ import ProductImage from "./common/productImages";
 import PricingPanel from "./common/pricingPanel";
 
 const ProductInStore = ({ product }) => {
-  const { name, images, originalPrice, discountedPrice, discountPercentage } =
-    product;
+  const { name, images, originalPrice, discountedPrice } = product;
 
   return (
     <div className="store__product">
@@ -12,7 +11,10 @@ const ProductInStore = ({ product }) => {
         <img src={images[0]} alt="" />
       </div>
       <h1 className="product__company">{name}</h1>
-      <PricingPanel />
+      <PricingPanel
+        originalPrice={originalPrice}
+        discountedPrice={discountedPrice}
+      />
     </div>
   );
 };

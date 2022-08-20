@@ -21,8 +21,8 @@ class App extends Component {
           <Switch>
             <Route path="/product/:id" component={Product} />
             <Route path="/collections" component={Collection} />
-            <Route path="/men" component={Store} />
-            <Route path="/women" component={Store} />
+            <Route path="/category/:id" component={Store} />
+            <Route path="/category/:id" component={Store} />
             <Route path="/store" component={Store} />
             <Route path="/contact" component={Contact} />
             <Route path="/about" component={About} />

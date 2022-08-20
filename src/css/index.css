@@ -27,6 +27,12 @@ body{
 .container{
     max-width: 1000px;
     margin: 0 auto;
+    overflow: hidden;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
 }
 
 img{
@@ -37,7 +43,6 @@ img{
    -ms-user-select: none; /* Internet Explorer/Edge */
     width: 100%;
     display: inline-block;
-
 }
 
 
@@ -917,3 +922,33 @@ img{
     display: grid;
     grid-template-columns: repeat(3,1fr);
 }
+
+
+
+/* Collections page */
+
+.collection{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 5%;
+    justify-content: center;
+    margin-top: 80px;
+}
+
+.collection__category{
+    max-width: 450px;
+}
+
+.collection__category img{
+    border-radius: 20px;
+}
+
+.category-name{
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 600;
+    margin: 0;
+    position: relative;
+    top: 70px;
+}
+

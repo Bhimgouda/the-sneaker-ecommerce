@@ -26,10 +26,10 @@ const Navbar = () => {
             <Link to="/collections">Collections</Link>
           </li>
           <li>
-            <Link to="/men">Men</Link>
+            <Link to="/category/men">Men</Link>
           </li>
           <li>
-            <Link to="/women">Women</Link>
+            <Link to="/category/women">Women</Link>
           </li>
           <li>
             <Link to="/about">About</Link>

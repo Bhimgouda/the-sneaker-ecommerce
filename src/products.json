@@ -7,6 +7,7 @@
         "originalPrice": 250,
         "discountedPrice": 125,
         "discountPercentage": 20,
+        "category":"men",
         "images" : [
             "https://i.ibb.co/HTyvsDX/image-product-1.webp",
             "https://i.ibb.co/QPt01Mc/image-product-2.webp",

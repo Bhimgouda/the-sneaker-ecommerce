@@ -117,17 +117,10 @@ img{
     padding: 1rem;
 }
 
-.icon--minus img{
-    position: absolute;
-    top: 9.5px;
-    left: 4px;
-}
 
-.icon--plus svg{
-    position: absolute;
-    top: 3.5px;
-    right: 5px;
-}
+
+
+
 
 @media screen and (min-width:768px) {
     .icon--minus svg{
@@ -890,7 +883,7 @@ img{
 
 .store__product img{
     border-radius:15px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 .store__product-gallery a{
@@ -908,7 +901,7 @@ img{
     width: 100%;
     border-radius: 20px;
     border: 2.5px solid transparent;
-    padding-bottom: 40px;
+    padding-bottom: 50px;
 }
 
 .store__product:hover{

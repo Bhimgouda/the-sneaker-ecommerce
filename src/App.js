@@ -19,15 +19,14 @@ class App extends Component {
         </header>
         <main>
           <Switch>
+            <Route path="/category/product/:id" component={Product} />
             <Route path="/product/:id" component={Product} />
+            <Route path="/category/:id" component={Store} />
             <Route path="/collections" component={Collection} />
-            <Route path="/category/:id" component={Store} />
-            <Route path="/category/:id" component={Store} />
             <Route path="/store" component={Store} />
             <Route path="/contact" component={Contact} />
             <Route path="/about" component={About} />
             <Route path="/not-found" component={NotFound} />
-            <Route path="/product/:id" component={Product} />
             <Redirect exact from="/" to="/store" />
             <Redirect to="/not-found" />
           </Switch>

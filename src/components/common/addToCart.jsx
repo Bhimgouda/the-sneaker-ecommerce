@@ -1,14 +1,38 @@
 import React from "react";
+import { useState } from "react";
 
 const AddToCart = () => {
+  let [itemsCount, setCount] = useState(1);
+
+  function onDecrement() {
+    if (itemsCount > 1) setCount(itemsCount - 1);
+  }
+
+  function onIncrement() {
+    setCount(itemsCount + 1);
+  }
+
   return (
     <div className="add-to-cart grid">
       <div className="product__quantity-selector disable-select">
-        <span className="icon icon--minus">
-          <img src="./images/icon-minus.svg" alt="" />
+        <span onClick={onDecrement} className="icon icon--minus">
+          <svg
+            width="12"
+            height="4"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+          >
+            <defs>
+              <path
+                d="M11.357 3.332A.641.641 0 0 0 12 2.69V.643A.641.641 0 0 0 11.357 0H.643A.641.641 0 0 0 0 .643v2.046c0 .357.287.643.643.643h10.714Z"
+                id="a"
+              />
+            </defs>
+            <use fill="#FF7E1B" fillRule="nonzero" xlinkHref="#a" />
+          </svg>
         </span>
-        <span className="product__quantity">1</span>
-        <span className="icon icon--plus">
+        <span className="product__quantity">{itemsCount}</span>
+        <span onClick={onIncrement} className="icon icon--plus">
           <svg
             width="12"
             height="12"

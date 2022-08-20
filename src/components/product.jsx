@@ -7,21 +7,16 @@ import AddToCart from "./common/addToCart";
 import products from "../products.json";
 
 const Product = (props) => {
-  const [product, setProduct] = useState({});
-
-  useEffect(() => {
-    const productId = props.match.params.id;
-    const product = products.find((product) => product._id === productId);
-    setProduct(product);
-  }, []);
+  const productId = props.match.params.id;
+  const product = products.find((product) => product._id === productId);
 
   const { name, companyName, desc } = product;
 
   return (
     <section className="product--main container">
       <div className="product__header">
-        <ProductImage />
-        <ProductThumbnails />
+        <ProductImage productImages={product.images} />
+        <ProductThumbnails thumbnailImages={product.thumbnailImages} />
       </div>
       <div className="product__body">
         <ProductInfo name={name} desc={desc} companyName={companyName} />

@@ -288,6 +288,7 @@ img{
 }
 
 .product__title{
+    text-transform: capitalize;
     margin: 1.5rem 0;
     color: var(--color-Very-vark-blue);
 }

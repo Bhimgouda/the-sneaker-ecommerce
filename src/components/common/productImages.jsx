@@ -1,8 +1,11 @@
 import React from "react";
 
-const ProductImage = ({ productImages }) => {
+const ProductImage = ({ showOverlay, productImages }) => {
   return (
-    <div className="product__image-container disable-select">
+    <div
+      onClick={showOverlay}
+      className="product__image-container disable-select"
+    >
       <div className="image-slider">
         <img
           src={productImages[productImages.length - 1]}

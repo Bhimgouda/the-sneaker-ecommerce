@@ -24,8 +24,13 @@ const NavLinks = ({ toggleValue, closeNavbar }) => {
         </Link>
       </li>
       <li className="nav__link">
-        <Link onClick={closeNavbar} to="/product/p001">
+        <Link onClick={closeNavbar} to="/product/p003">
           Today's Pick
+        </Link>
+      </li>
+      <li className="nav__link">
+        <Link onClick={closeNavbar} to="/about">
+          About me
         </Link>
       </li>
     </ul>

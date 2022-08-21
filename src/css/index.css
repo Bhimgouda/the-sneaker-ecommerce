@@ -559,7 +559,7 @@ img{
 
 
 
-@media screen and (max-width:767px) {
+@media screen and (max-width:900px) {
     
     .navbar{
         padding: 0.5rem 2rem;
@@ -570,7 +570,7 @@ img{
         flex-direction: column;
         height: calc(100vh - 62.65px);
         top: 62.65px;
-        left: -300px;
+        left: -500px;
         font-weight: bold;
         color: black;
         z-index: 20;
@@ -941,6 +941,10 @@ img{
     max-width: 450px;
 }
 
+.collection__category:hover{
+    opacity: 0.9;
+}
+
 .collection__category img{
     border-radius: 20px;
 }
@@ -954,3 +958,31 @@ img{
     top: 70px;
 }
 
+
+/* About Page */
+
+
+.about-section{
+    margin-top: 100px;
+    text-align: center;
+}
+
+.person-image{
+    margin: 40px 0;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: 4px solid var(--color-orange);
+}
+
+
+/* Not found Page */
+
+
+.notfound-page{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(226,226,226,255);
+}

@@ -1,7 +1,13 @@
 import React from "react";
 
 const NotFound = () => {
-  return <h1>Not Found</h1>;
+  return (
+    <div className="notfound-page">
+      <div className="container">
+        <img src="./images/404.webp" alt="" />
+      </div>
+    </div>
+  );
 };
 
 export default NotFound;

@@ -21,7 +21,7 @@ class App extends Component {
     this.setState({ loading: true });
     setTimeout(() => {
       this.setState({ loading: false });
-    }, 700);
+    });
   }
 
   handleATC = (product, itemsCount) => {

@@ -10,11 +10,17 @@ import Product from "./components/product";
 import Store from "./components/store";
 
 class App extends Component {
-  state = { productsInCart: [] };
+  state = { productsInCart: [], loading: false };
+
+  componentDidMount() {
+    this.setState({ loading: true });
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, 700);
+  }
 
   handleATC = (product, itemsCount) => {
     let edited = false;
-    const orginalCart = [...this.state.productsInCart];
     let productsInCart = [...this.state.productsInCart].map((p) => {
       if (p._id === product._id) {
         p.itemsCount = p.itemsCount + itemsCount;
@@ -37,6 +43,12 @@ class App extends Component {
   };
 
   render() {
+    let loadingClass = "loading";
+    let mainClass = "hide";
+    if (!this.state.loading) {
+      mainClass = "";
+      loadingClass = "loading hide";
+    }
     const { productsInCart } = this.state;
     return (
       <React.Fragment>
@@ -46,7 +58,8 @@ class App extends Component {
             productsInCart={productsInCart}
           />
         </header>
-        <main>
+        <p className={loadingClass}>Loading...</p>
+        <main className={mainClass}>
           <Switch>
             <Route
               path="/category/product/:id"

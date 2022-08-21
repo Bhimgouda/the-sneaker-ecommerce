@@ -11,6 +11,7 @@ html{
     box-sizing: border-box;
 }
 
+
 body{
     font-size: 1.5rem;
     font-family: 'Poppins', sans-serif;
@@ -985,4 +986,18 @@ img{
     justify-content: center;
     align-items: center;
     background-color: rgba(226,226,226,255);
+}
+
+
+.hide{
+    visibility: hidden;
+}
+
+.loading{
+    position: relative;
+    top: 100px;
+    margin: 0;
+    text-align: center;
+    color: var(--color-orange);
+    font-weight: 600;
 }

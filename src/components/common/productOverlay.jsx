@@ -1,10 +1,23 @@
-const ProductOverlay = ({
-  hideOverlay,
-  overlayOn,
-  images,
-  thumbnailImages,
-}) => {
-  console.log(overlayOn);
+import { useState } from "react";
+const ProductOverlay = (props) => {
+  const { hideOverlay, overlayOn, images, thumbnailImages } = props;
+
+  const [currentImage, setCurrentImage] = useState(0);
+
+  const handleImageChange = (index) => {
+    setCurrentImage(index);
+  };
+
+  const handleImagePrev = () => {
+    if (currentImage === 0) setCurrentImage(images.length - 1);
+    else setCurrentImage(currentImage - 1);
+  };
+
+  const handleImageNext = () => {
+    if (currentImage === images.length - 1) setCurrentImage(0);
+    else setCurrentImage(currentImage + 1);
+  };
+
   let overlayClass = "product--overlay disable-select product--overlay--hidden";
   if (overlayOn) overlayClass = "product--overlay disable-select";
   return (
@@ -20,6 +33,7 @@ const ProductOverlay = ({
           </svg>
         </span>
         <span
+          onClick={handleImagePrev}
           className="icon-container image-slider-btn"
           id="prev-btn--overlay"
         >
@@ -34,6 +48,7 @@ const ProductOverlay = ({
           </svg>
         </span>
         <span
+          onClick={handleImageNext}
           className="icon-container image-slider-btn"
           id="next-btn--overlay"
         >
@@ -49,30 +64,21 @@ const ProductOverlay = ({
         </span>
         <div className="overlay__image">
           <div className="image-slider">
-            <img src={images[images.length - 1]} />
-            {images.map((img, index) => {
-              return (
-                <img
-                  key={index}
-                  src={img}
-                  alt=""
-                  id={`product__image--${index + 1}`}
-                />
-              );
-            })}
-
-            <img src={images[0]} alt="" id="first-clone" />
+            <img src={images[currentImage]} />
           </div>
         </div>
       </div>
 
       <div className="thumbnail-container">
         {thumbnailImages.map((img, index) => {
+          let thumbnailClass = "thumbnail ";
+          if (index === currentImage) thumbnailClass += "thumbnail__current";
           return (
             <div key={index} className="overlay-thumbnail-background">
               <img
-                id={`thumbnail-overlay-${index + 1}`}
-                className="thumbnail thumbnail__current "
+                onClick={() => handleImageChange(index)}
+                id={index}
+                className={thumbnailClass}
                 src={img}
                 alt=""
               />

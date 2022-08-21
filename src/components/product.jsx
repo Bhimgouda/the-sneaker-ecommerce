@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ProductImage from "./common/productImages";
-import ProductThumbnails from "./common/productThumbnails";
 import PricingPanel from "./common/pricingPanel";
 import ProductInfo from "./common/productInfo";
 import AddToCart from "./common/addToCart";
@@ -9,6 +8,7 @@ import ProductOverlay from "./common/productOverlay";
 
 const Product = (props) => {
   const [overlay, setOverlay] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
 
   const productId = props.match.params.id;
   const product = [...getProducts()].find(
@@ -30,12 +30,19 @@ const Product = (props) => {
     else setOverlay(true);
   };
 
+  const handleImageChange = (id) => {
+    setCurrentImage(id);
+  };
+
   return (
     <React.Fragment>
       <section className="product--main container">
         <div className="product__header">
-          <ProductImage showOverlay={handleOverlay} productImages={images} />
-          <ProductThumbnails thumbnailImages={thumbnailImages} />
+          <ProductImage
+            showOverlay={handleOverlay}
+            productImages={images}
+            thumbnailImages={thumbnailImages}
+          />
         </div>
         <div className="product__body">
           <ProductInfo name={name} desc={desc} companyName={companyName} />

@@ -568,8 +568,8 @@ img{
     .nav__links{
         position: absolute;
         flex-direction: column;
-        height: calc(100vh - 70.65px);
-        top: 70.65px;
+        height: calc(100vh - 62.65px);
+        top: 62.65px;
         left: -300px;
         font-weight: bold;
         color: black;

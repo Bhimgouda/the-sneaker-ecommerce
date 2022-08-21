@@ -10,17 +10,52 @@ import Product from "./components/product";
 import Store from "./components/store";
 
 class App extends Component {
-  state = {};
+  state = { productsInCart: [] };
+
+  handleATC = (product, itemsCount) => {
+    let edited = false;
+    const orginalCart = [...this.state.productsInCart];
+    let productsInCart = [...this.state.productsInCart].map((p) => {
+      if (p._id === product._id) {
+        p.itemsCount = p.itemsCount + itemsCount;
+        edited = true;
+        return product;
+      }
+      return p;
+    });
+    if (!edited) {
+      product.itemsCount = itemsCount;
+      productsInCart.push(product);
+    }
+    this.setState({ productsInCart });
+  };
+
+  handleDelete = (id) => {
+    let productsInCart = [...this.state.productsInCart];
+    productsInCart = productsInCart.filter((p) => p._id !== id);
+    this.setState({ productsInCart });
+  };
+
   render() {
+    const { productsInCart } = this.state;
     return (
       <React.Fragment>
         <header>
-          <Navbar />
+          <Navbar
+            onDelete={this.handleDelete}
+            productsInCart={productsInCart}
+          />
         </header>
         <main>
           <Switch>
-            <Route path="/category/product/:id" component={Product} />
-            <Route path="/product/:id" component={Product} />
+            <Route
+              path="/category/product/:id"
+              render={(props) => <Product onATC={this.handleATC} {...props} />}
+            />
+            <Route
+              path="/product/:id"
+              render={(props) => <Product onATC={this.handleATC} {...props} />}
+            />
             <Route path="/category/:id" component={Store} />
             <Route path="/collections" component={Collection} />
             <Route path="/store" component={Store} />

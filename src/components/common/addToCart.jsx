@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-const AddToCart = () => {
+const AddToCart = ({ onATC }) => {
   let [itemsCount, setCount] = useState(1);
 
   function onDecrement() {
@@ -49,7 +49,13 @@ const AddToCart = () => {
           </svg>
         </span>
       </div>
-      <button className="btn btn--cart fill">
+      <button
+        onClick={() => {
+          setCount(1);
+          onATC(itemsCount);
+        }}
+        className="btn btn--cart fill"
+      >
         <div>
           <span className="icon-container">
             <svg width="22" height="20" xmlns="http://www.w3.org/2000/svg">

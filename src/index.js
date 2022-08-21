@@ -4,8 +4,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./css/index.css";
 import { BrowserRouter } from "react-router-dom";
-import ProductInfo from "./components/common/productInfo";
-import AddToCart from "./components/common/addToCart";
+import "/node_modules/@fortawesome/fontawesome-free/css/all.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

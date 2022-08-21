@@ -5,6 +5,7 @@ import PricingPanel from "./common/pricingPanel";
 import ProductInfo from "./common/productInfo";
 import AddToCart from "./common/addToCart";
 import { getProducts } from "../fakeDatabase";
+
 const Product = (props) => {
   const productId = props.match.params.id;
   const product = [...getProducts()].find(
@@ -25,7 +26,7 @@ const Product = (props) => {
           originalPrice={originalPrice}
           discountedPrice={discountedPrice}
         />
-        <AddToCart />
+        <AddToCart onATC={(itemsCount) => props.onATC(product, itemsCount)} />
       </div>
     </section>
   );

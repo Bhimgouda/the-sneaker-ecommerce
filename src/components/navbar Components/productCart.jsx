@@ -1,6 +1,7 @@
 import React from "react";
 
-const ProductCart = ({ onDelete, cartVisiblity, productsInCart }) => {
+const ProductCart = (props) => {
+  const { onCheckout, onDelete, cartVisiblity, productsInCart } = props;
   let productCartClass =
     "product--cart product--cart--hidden product--cart--empty";
 
@@ -64,7 +65,9 @@ const ProductCart = ({ onDelete, cartVisiblity, productsInCart }) => {
             );
           })}
         </div>
-        <button className="btn btn--checkout">Checkout</button>
+        <button onClick={onCheckout} className="btn btn--checkout">
+          Checkout
+        </button>
       </div>
     </div>
   );

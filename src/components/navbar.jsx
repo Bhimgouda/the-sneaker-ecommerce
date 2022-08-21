@@ -6,7 +6,7 @@ import NavLinks from "./navbar Components/navLinks";
 import ProductCart from "./navbar Components/productCart";
 import UserSection from "./navbar Components/userSection";
 
-const Navbar = ({ onDelete, productsInCart }) => {
+const Navbar = ({ handleCheckout, onDelete, productsInCart }) => {
   const [toggleValue, setToggle] = useState(false);
   const [cartVisiblity, setCartVisiblity] = useState("hide");
   const [totalQuantity, setQuantity] = useState(0);
@@ -37,6 +37,7 @@ const Navbar = ({ onDelete, productsInCart }) => {
       </div>
       <UserSection quantity={totalQuantity} onCartClick={handleCartClick} />
       <ProductCart
+        onCheckout={handleCheckout}
         onDelete={onDelete}
         cartVisiblity={cartVisiblity}
         productsInCart={productsInCart}

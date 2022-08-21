@@ -12,6 +12,11 @@ import Store from "./components/store";
 class App extends Component {
   state = { productsInCart: [], loading: false };
 
+  handleCheckout = () => {
+    console.log("checkout");
+    this.setState({ productsInCart: [] });
+  };
+
   componentDidMount() {
     this.setState({ loading: true });
     setTimeout(() => {
@@ -54,6 +59,7 @@ class App extends Component {
       <React.Fragment>
         <header>
           <Navbar
+            handleCheckout={this.handleCheckout}
             onDelete={this.handleDelete}
             productsInCart={productsInCart}
           />

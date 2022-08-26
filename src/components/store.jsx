@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import ProductInStore from "./productsInStore";
 import CategoryHelper from "./../utils/categoryHelper";
 import { getProducts } from "./../fakeDatabase";
+import ProductInStore from "./productsInStore";
 
 const Store = (props) => {
   const [products, setProducts] = useState([]);

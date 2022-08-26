@@ -1,8 +1,7 @@
 import React from "react";
-import ProductImage from "./common/productImages";
 import PricingPanel from "./common/pricingPanel";
 
-const ProductInStore = ({ product }) => {
+export default ({ product }) => {
   const { name, images, originalPrice, discountedPrice } = product;
 
   return (
@@ -18,5 +17,3 @@ const ProductInStore = ({ product }) => {
     </div>
   );
 };
-
-export default ProductInStore;

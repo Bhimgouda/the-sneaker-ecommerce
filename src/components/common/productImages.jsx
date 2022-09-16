@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import ProductOverlay from "./productOverlay";
 
 const ProductImage = (props) => {
-  const { showOverlay, productImages } = props;
+  const { productImages } = props;
   const [currentImage, setCurrentImage] = useState(0);
+  const [overlay, setOverlay] = useState(false);
 
   const handleImageChange = (index) => {
     setCurrentImage(index);
@@ -18,10 +20,15 @@ const ProductImage = (props) => {
     else setCurrentImage(currentImage + 1);
   };
 
+  const handleOverlay = () => {
+    if (overlay) setOverlay(false);
+    else setOverlay(true);
+  };
+
   return (
     <React.Fragment>
       <div
-        onClick={showOverlay}
+        onClick={handleOverlay}
         className="product__image-container disable-select"
       >
         <div className="image-slider">
@@ -74,6 +81,12 @@ const ProductImage = (props) => {
           );
         })}
       </div>
+      <ProductOverlay
+        startImage={currentImage}
+        images={productImages}
+        hideOverlay={handleOverlay}
+        overlayOn={overlay}
+      />
     </React.Fragment>
   );
 };

@@ -1,38 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NavLinks = ({ toggleValue, closeNavbar }) => {
+const NavLinks = ({ toggleValue, onNavLinkClick, activeLink }) => {
+  const theNavLinks = [
+    { label: "Collections", link: "/collections" },
+    { label: "Men", link: "/category/men" },
+    { label: "Women", link: "/category/women" },
+    { label: "Today's Pick", link: "/product/p003" },
+    { label: "About me", link: "/about" },
+  ];
   return (
     <ul
       className={
         (toggleValue && "nav__links nav__links--expanded") || "nav__links"
       }
     >
-      <li className="nav__link">
-        <Link onClick={closeNavbar} to="/collections">
-          Collections
-        </Link>
-      </li>
-      <li className="nav__link">
-        <Link onClick={closeNavbar} to="/category/men">
-          Men
-        </Link>
-      </li>
-      <li className="nav__link">
-        <Link onClick={closeNavbar} to="/category/women">
-          Women
-        </Link>
-      </li>
-      <li className="nav__link">
-        <Link onClick={closeNavbar} to="/product/p003">
-          Today's Pick
-        </Link>
-      </li>
-      <li className="nav__link">
-        <Link onClick={closeNavbar} to="/about">
-          About me
-        </Link>
-      </li>
+      {theNavLinks.map((link, index) => (
+        <li key={index} className={link.label === activeLink ? "active" : ""}>
+          <Link onClick={() => onNavLinkClick(link.label)} to={link.link}>
+            {link.label}
+          </Link>
+        </li>
+      ))}
     </ul>
   );
 };

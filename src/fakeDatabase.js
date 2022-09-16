@@ -71,10 +71,10 @@ let categories = [
 ];
 let product1Images = [
   [
-    "/images/shoes/image-product-1.webp",
-    "/images/shoes/image-product-2.webp",
-    "/images/shoes/image-product-3.webp",
-    "/images/shoes/image-product-4.webp",
+    "/images/shoes/shoe-0-1.webp",
+    "/images/shoes/shoe-0-2.webp",
+    "/images/shoes/shoe-0-3.webp",
+    "/images/shoes/shoe-0-4.webp",
   ],
   [
     "/images/shoes/shoe-2-1.jpg",

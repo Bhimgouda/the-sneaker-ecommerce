@@ -7,6 +7,7 @@ import ProductCart from "./navbar Components/productCart";
 import UserSection from "./navbar Components/userSection";
 
 const Navbar = ({ handleCheckout, onDelete, productsInCart }) => {
+  const [activeLink, setActiveLink] = useState("");
   const [toggleValue, setToggle] = useState(false);
   const [cartVisiblity, setCartVisiblity] = useState("hide");
   const [totalQuantity, setQuantity] = useState(0);
@@ -16,9 +17,16 @@ const Navbar = ({ handleCheckout, onDelete, productsInCart }) => {
     else setCartVisiblity("hide");
   };
 
-  const handleToggle = () => {
-    if (toggleValue) setToggle(false);
-    else setToggle(true);
+  const handleNavLinkClick = (link) => {
+    const handleToggle = () => {
+      if (toggleValue) setToggle(false);
+      else setToggle(true);
+    };
+    handleToggle();
+    const handleActive = (link) => {
+      setActiveLink(link);
+    };
+    handleActive(link);
   };
 
   useEffect(() => {
@@ -31,9 +39,13 @@ const Navbar = ({ handleCheckout, onDelete, productsInCart }) => {
   return (
     <nav className="navbar navbar-container">
       <div className="nav__header">
-        <Toggler toggleValue={toggleValue} onToggle={handleToggle} />
+        <Toggler toggleValue={toggleValue} onToggle={handleNavLinkClick} />
         <Logo />
-        <NavLinks closeNavbar={handleToggle} toggleValue={toggleValue} />
+        <NavLinks
+          activeLink={activeLink}
+          onNavLinkClick={handleNavLinkClick}
+          toggleValue={toggleValue}
+        />
       </div>
       <UserSection quantity={totalQuantity} onCartClick={handleCartClick} />
       <ProductCart

@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const ProductOverlay = (props) => {
-  const { hideOverlay, overlayOn, images } = props;
-
+  const { hideOverlay, overlayOn, images, startImage } = props;
   const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    setCurrentImage(startImage);
+  }, [startImage]);
 
   const handleImageChange = (index) => {
     setCurrentImage(index);

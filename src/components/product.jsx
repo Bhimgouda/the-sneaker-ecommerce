@@ -5,44 +5,28 @@ import ProductInfo from "./common/productInfo";
 import AddToCart from "./common/addToCart";
 import { getProducts } from "../fakeDatabase";
 import ProductOverlay from "./common/productOverlay";
+import { useParams } from "react-router-dom";
 
 const Product = (props) => {
   const [overlay, setOverlay] = useState(false);
-  const [currentImage, setCurrentImage] = useState(0);
-
-  const productId = props.match.params.id;
+  const { id: productId } = useParams();
   const product = [...getProducts()].find(
     (product) => product._id === productId
   );
 
-  const {
-    name,
-    companyName,
-    desc,
-    originalPrice,
-    discountedPrice,
-    images,
-    thumbnailImages,
-  } = product;
+  const { name, companyName, desc, originalPrice, discountedPrice, images } =
+    product;
 
   const handleOverlay = () => {
     if (overlay) setOverlay(false);
     else setOverlay(true);
   };
 
-  const handleImageChange = (id) => {
-    setCurrentImage(id);
-  };
-
   return (
     <React.Fragment>
       <section className="product--main container">
         <div className="product__header">
-          <ProductImage
-            showOverlay={handleOverlay}
-            productImages={images}
-            thumbnailImages={thumbnailImages}
-          />
+          <ProductImage showOverlay={handleOverlay} productImages={images} />
         </div>
         <div className="product__body">
           <ProductInfo name={name} desc={desc} companyName={companyName} />
@@ -54,7 +38,6 @@ const Product = (props) => {
         </div>
       </section>
       <ProductOverlay
-        thumbnailImages={thumbnailImages}
         images={images}
         hideOverlay={handleOverlay}
         overlayOn={overlay}

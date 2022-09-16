@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const ProductImage = (props) => {
-  const { thumbnailImages, showOverlay, productImages } = props;
+  const { showOverlay, productImages } = props;
   const [currentImage, setCurrentImage] = useState(0);
 
   const handleImageChange = (index) => {
@@ -59,7 +59,7 @@ const ProductImage = (props) => {
         </span>
       </div>
       <div className="thumbnail-container">
-        {thumbnailImages.map((image, index) => {
+        {productImages.map((image, index) => {
           let thumbnailClass = "thumbnail ";
           if (index === currentImage) thumbnailClass += "thumbnail__current";
           return (

@@ -1,6 +1,6 @@
 import { useState } from "react";
 const ProductOverlay = (props) => {
-  const { hideOverlay, overlayOn, images, thumbnailImages } = props;
+  const { hideOverlay, overlayOn, images } = props;
 
   const [currentImage, setCurrentImage] = useState(0);
 
@@ -70,7 +70,7 @@ const ProductOverlay = (props) => {
       </div>
 
       <div className="thumbnail-container">
-        {thumbnailImages.map((img, index) => {
+        {images.map((img, index) => {
           let thumbnailClass = "thumbnail ";
           if (index === currentImage) thumbnailClass += "thumbnail__current";
           return (

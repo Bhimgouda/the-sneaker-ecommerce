@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import CategoryHelper from "./../utils/categoryHelper";
 import { getProducts } from "./../fakeDatabase";
 import ProductInStore from "./productsInStore";
 
-const Store = (props) => {
+const Store = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     setProducts(productsInStock);
-  }, [props]);
+  }, [useParams()]);
 
   let productsInStock = [...getProducts()];
-  if (props.match.params.id) {
-    const category = props.match.params.id;
+  const { id: category } = useParams();
+  if (category) {
     productsInStock = CategoryHelper(category, [...productsInStock]);
   }
 

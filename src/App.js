@@ -1,4 +1,4 @@
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import React, { Component, lazy, Suspense } from "react";
 import Navbar from "./components/navbar";
 import Contact from "./components/contact";
@@ -17,13 +17,6 @@ class App extends Component {
     console.log("checkout");
     this.setState({ productsInCart: [] });
   };
-
-  componentDidMount() {
-    this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({ loading: false });
-    }, 700);
-  }
 
   handleATC = (product, itemsCount) => {
     let edited = false;
@@ -62,28 +55,23 @@ class App extends Component {
 
         <Suspense fallback={<div className="loading">Loading...</div>}>
           <main>
-            <Switch>
+            <Routes>
+              <Route path="/" element={<Store />} />
               <Route
-                path="/category/product/:id"
-                render={(props) => (
-                  <Product onATC={this.handleATC} {...props} />
-                )}
+                path="/category/:collection/product/:id"
+                element={<Product onATC={this.handleATC} />}
               />
               <Route
                 path="/product/:id"
-                render={(props) => (
-                  <Product onATC={this.handleATC} {...props} />
-                )}
+                element={<Product onATC={this.handleATC} />}
               />
-              <Route path="/category/:id" component={Store} />
-              <Route path="/collections" component={Collection} />
-              <Route path="/store" component={Store} />
-              <Route path="/contact" component={Contact} />
-              <Route path="/about" component={About} />
-              <Route path="/not-found" component={NotFound} />
-              <Redirect exact from="/" to="/store" />
-              <Redirect to="/not-found" />
-            </Switch>
+              <Route path="/store" element={<Store />} />
+              <Route path="/collections" element={<Collection />} />
+              <Route path="/category/:id" element={<Store />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/about" element={<About />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
           </main>
         </Suspense>
       </React.Fragment>

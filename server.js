@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const catchAsync = require("./utils/catchAsync");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const User = require("./model/user");
 
 
 // ---------------------------------- ESSENTIALS ----------------------------------//
@@ -77,6 +78,19 @@ app.get("/api/auth/google/callback", catchAsync(async(req,res)=>{
   const {code} = req.query
   const accessToken = await getAccessTokenFromGoogle(code)
   const userData = await getUserDataFromAccessToken(accessToken)
+
+  const user = await User.findOne({email: userData.email});
+  if(user) {
+    req.session.user_id = user._id;
+  }
+  else{
+    const {_id} = await User.create({
+      name: userData.name,
+      email: userData.email,
+    })
+    req.session.user_id = _id;
+  }
+
   if(process.NODE_ENV !== "production"){
     return res.redirect("http://localhost:3000")
   }
@@ -84,12 +98,18 @@ app.get("/api/auth/google/callback", catchAsync(async(req,res)=>{
 }))
 
 // As soon as it redirects to client ... the react app re-renders and the client logged-in function makes the call with user id in req.session and we respond with the user from DB
-app.get('api/current-user', (req,res)=>{
+app.get('/api/current-user', async(req,res)=>{
   if(req.session.user_id){
-    //res.send(user)
+    const user = await User.findById(req.session.user_id);
+    return res.send(user)
   }
-  //return user needs to login message
+  return res.end()
 }) 
+
+app.get('/api/logout', catchAsync(async(req,res)=>{
+  req.session.user_id = null;
+  return res.send({message:"You are successfully Logged Out"})
+}))
 
 
 // Error Handling middleware

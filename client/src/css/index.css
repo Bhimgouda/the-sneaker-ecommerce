@@ -486,6 +486,7 @@ img{
     padding: 3rem 1rem 3rem 2rem;
     cursor: pointer; 
     position: relative;
+    margin-right: 1.5rem;
 }
 
 .navbar .user__cart-icon:hover path{

@@ -1,9 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component, lazy, Suspense} from "react";
 import Navbar from "./components/navbar";
 import Contact from "./components/contact";
 import NotFound from "./components/not-found";
-import * as queryString from "query-string"
+import { Provider } from "react-redux";
+import { store } from "./app/store";
+import { getUser } from "./slices/userSlice";
 
 // Lazy load components
 const Collection = lazy(() => import("./components/collections"));
@@ -43,27 +45,14 @@ class App extends Component {
   };
 
 
-  // This is to generate a query string
-  queryString = queryString.stringify({
-    client_id: "1030463715027-p7jmac6ju1iia3fbj6a09d6hnt866ec1.apps.googleusercontent.com",
-    redirect_uri: 'http://localhost:5000/api/auth/google/callback',
-    scope: [
-      'https://www.googleapis.com/auth/userinfo.email',
-      'https://www.googleapis.com/auth/userinfo.profile',
-    ].join(' '), // space seperated string
-    response_type: 'code',
-    access_type: 'offline',
-    prompt: 'consent',
-  });
+;
+
   
-  // This link takes the user from client to google's sign in page
-  googleLoginUrl = `https://accounts.google.com/o/oauth2/v2/auth?${this.queryString}`;
-
-
   render() {
+
     const { productsInCart } = this.state;
     return (
-      <React.Fragment>
+      <Provider store={store}>
         <header>
           <Navbar
             handleCheckout={this.handleCheckout}
@@ -71,14 +60,6 @@ class App extends Component {
             productsInCart={productsInCart}
           />
         </header>
-
-        
-
-  <a href={this.googleLoginUrl}>
-    Login with Google
-  </a>
-
-
         <Suspense fallback={<div className="loading">Loading...</div>}>
           <main>
             <Routes>
@@ -94,7 +75,7 @@ class App extends Component {
             </Routes>
           </main>
         </Suspense>
-      </React.Fragment>
+      </Provider>
     );
   }
 }

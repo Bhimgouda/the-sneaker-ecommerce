@@ -5,14 +5,26 @@ import CategoryHelper from "./../utils/categoryHelper";
 import { getProducts } from "./../fakeDatabase";
 import ProductInStore from "./productsInStore";
 import axios from "axios";
+import{ useDispatch }from 'react-redux'
+import {setUser} from '../slices/userSlice'
 
 const Store = () => {
   const [products, setProducts] = useState([]);
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    const getCurrentUser = ()=>{
-      const {data} = axios.get('/api/current-use')
-      console.log(user)
+    const getCurrentUser = async()=>{
+      try{
+        const {data} = await axios.get('/api/current-user');
+        console.log(data)
+        dispatch(setUser(data))
+      }
+      catch(e){
+        console.log(e)
+      }
     }
+    getCurrentUser()
+
     setProducts(productsInStock);
 
   }, [useParams()]);

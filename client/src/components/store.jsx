@@ -4,11 +4,17 @@ import { Link } from "react-router-dom";
 import CategoryHelper from "./../utils/categoryHelper";
 import { getProducts } from "./../fakeDatabase";
 import ProductInStore from "./productsInStore";
+import axios from "axios";
 
 const Store = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
+    const getCurrentUser = ()=>{
+      const {data} = axios.get('/api/current-use')
+      console.log(user)
+    }
     setProducts(productsInStock);
+
   }, [useParams()]);
 
   let productsInStock = [...getProducts()];

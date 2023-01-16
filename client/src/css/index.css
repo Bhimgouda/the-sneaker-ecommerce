@@ -1002,7 +1002,14 @@ img{
 
 /* Not found Page */
 
-
+.not-found{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    font-size: 5rem;
+    font-weight: 700;
+}
 
 
 

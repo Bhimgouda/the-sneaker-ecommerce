@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import ProductOverlay from "./productOverlay";
 
-const ProductImage = (props) => {
-  const { productImages } = props;
+const ProductImage = ({productImages}) => {
   const [currentImage, setCurrentImage] = useState(0);
   const [overlay, setOverlay] = useState(false);
 
@@ -32,7 +31,7 @@ const ProductImage = (props) => {
         className="product__image-container disable-select"
       >
         <div className="image-slider">
-          <img src={productImages[currentImage]} alt="" id="last-clone" />
+          <img src={productImages && productImages[currentImage]} alt="" id="last-clone" />
         </div>
         <span
           onClick={handleImagePrev}
@@ -66,7 +65,7 @@ const ProductImage = (props) => {
         </span>
       </div>
       <div className="thumbnail-container">
-        {productImages.map((image, index) => {
+        {productImages && productImages.map((image, index) => {
           let thumbnailClass = "thumbnail ";
           if (index === currentImage) thumbnailClass += "thumbnail__current";
           return (

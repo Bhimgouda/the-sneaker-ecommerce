@@ -1,19 +1,46 @@
 import { Route, Routes } from "react-router-dom";
-import React, { lazy, Suspense, useState} from "react";
+import React, { lazy, Suspense, useEffect, useState} from "react";
 import Navbar from "./components/navbar";
-import Contact from "./components/contact";
-import NotFound from "./components/not-found";
-import { Provider } from "react-redux";
-import { store } from "./app/store";
+import Contact from "./pages/contact";
+import NotFound from "./pages/not-found";
+import { Provider, useDispatch } from "react-redux";
+
+import {setUser} from './slices/userSlice'
+import axios from "axios";
+import { setProducts } from "./slices/productSlice";
 
 // Lazy load components
-const Collection = lazy(() => import("./components/collections"));
-const Store = lazy(() => import("./components/store"));
-const Product = lazy(() => import("./components/product"));
-const About = lazy(() => import("./components/about"));
+const Collection = lazy(() => import("./pages/collections"));
+const Store = lazy(() => import("./pages/store"));
+const Product = lazy(() => import("./pages/product"));
+const About = lazy(() => import("./pages/about"));
 
 function App() {
   const [productsInCart, setProductsInCart] = useState([]);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const getCurrentUser = async()=>{
+      try{
+        const {data} = await axios.get('/api/current-user');
+        dispatch(setUser(data))
+      }
+      catch(e){
+        console.log(e)
+      }
+    }
+    getCurrentUser()
+  }, []);
+
+  
+  useEffect(()=>{
+    const requestProducts = async()=>{
+      const {data} = await axios.get("/api/products")
+      dispatch(setProducts(data));
+    }
+
+    requestProducts()
+  }, [])
 
   const handleCheckout = () => {
     setProductsInCart([]);
@@ -44,8 +71,8 @@ function App() {
   };
 
   return (
-    <Provider store={store}>
-        <header>
+   <>
+      <header>
           <Navbar
             handleCheckout={handleCheckout}
             onDelete={handleDelete}
@@ -67,7 +94,7 @@ function App() {
             </Routes>
           </main>
         </Suspense>
-      </Provider>
+   </>
   )
 }
 

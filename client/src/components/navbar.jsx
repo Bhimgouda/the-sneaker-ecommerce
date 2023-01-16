@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "./navbar Components/logo";
 import Toggler from "./navbar Components/navbarToggler";
 import NavLinks from "./navbar Components/navLinks";
@@ -7,6 +7,7 @@ import ProductCart from "./navbar Components/productCart";
 import UserSection from "./navbar Components/userSection";
 
 const Navbar = ({ handleCheckout, onDelete, productsInCart }) => {
+  const navigate = useNavigate()
   const [activeLink, setActiveLink] = useState("");
   const [toggleValue, setToggle] = useState(false);
   const [cartVisiblity, setCartVisiblity] = useState("hide");
@@ -17,16 +18,20 @@ const Navbar = ({ handleCheckout, onDelete, productsInCart }) => {
     else setCartVisiblity("hide");
   };
 
-  const handleNavLinkClick = (link) => {
+  const handleNavLinkClick = (label, link) => {
     const handleToggle = () => {
       if (toggleValue) setToggle(false);
       else setToggle(true);
     };
+    
     handleToggle();
-    const handleActive = (link) => {
-      setActiveLink(link);
+    
+    const handleActive = (label) => {
+      setActiveLink(label);
     };
-    handleActive(link);
+    handleActive(label);
+
+    return navigate(link)
   };
 
   useEffect(() => {

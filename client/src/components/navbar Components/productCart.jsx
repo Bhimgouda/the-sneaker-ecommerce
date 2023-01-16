@@ -26,7 +26,7 @@ const ProductCart = (props) => {
               >
                 <div className="thumbnail-and-product">
                   <div className="icon-container cart__product-thumbnail">
-                    <img src={images[0]} alt="" />
+                    <img loading="lazy" src={images[0]} alt="" />
                   </div>
                   <div className="cart__product-info">
                     <p className="cart__product-title">{name}</p>

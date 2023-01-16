@@ -6,7 +6,7 @@ const NavLinks = ({ toggleValue, onNavLinkClick, activeLink }) => {
     { label: "Collections", link: "/collections" },
     { label: "Men", link: "/category/men" },
     { label: "Women", link: "/category/women" },
-    { label: "Today's Pick", link: "/product/p003" },
+    { label: "Today's Pick", link: "/product/63c51b360844b9350f40d3e0" },
     { label: "About me", link: "/about" },
   ];
   return (
@@ -17,9 +17,9 @@ const NavLinks = ({ toggleValue, onNavLinkClick, activeLink }) => {
     >
       {theNavLinks.map((link, index) => (
         <li key={index} className={link.label === activeLink ? "active" : ""}>
-          <Link onClick={() => onNavLinkClick(link.label)} to={link.link}>
+          <a onClick={() => onNavLinkClick(link.label, link.link)} >
             {link.label}
-          </Link>
+          </a>
         </li>
       ))}
     </ul>

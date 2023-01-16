@@ -44,7 +44,7 @@ const UserSection = ({ quantity, onCartClick }) => {
         {
           user ?
           <div onClick={handleLogout} className="user__image">
-            <img src="https://i.ibb.co/SfFD1GL/image-avatar.png" alt="" />
+            <img loading="lazy" src={user.profilePic} alt="" />
           </div>
           :
           <div className="user__login">

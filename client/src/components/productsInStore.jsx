@@ -7,7 +7,7 @@ export default ({ product }) => {
   return (
     <div className="store__product">
       <div className="product__image">
-        <img src={images[0]} alt="" />
+        <img loading="lazy" src={images[0]} alt="" />
       </div>
       <h1 className="product__company">{name}</h1>
       <PricingPanel

@@ -7,13 +7,13 @@ const Collection = () => {
       <div className="collection__category">
         <Link to="/category/men">
           <p className="category-name">Men</p>
-          <img src="/images/shoes/shoe-4-1.webp" alt="" />
+          <img loading="lazy" src="/images/shoes/shoe-4-1.webp" alt="" />
         </Link>
       </div>
       <div className="collection__category">
         <Link to="/category/women">
           <p className="category-name">Women</p>
-          <img src="/images/shoes/shoe-11-1.webp" alt="" />
+          <img loading="lazy" src="/images/shoes/shoe-11-1.webp" alt="" />
         </Link>
       </div>
     </div>

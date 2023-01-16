@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
-import ProductImage from "./common/productImages";
-import PricingPanel from "./common/pricingPanel";
-import ProductInfo from "./common/productInfo";
-import AddToCart from "./common/addToCart";
-import { getProducts } from "../fakeDatabase";
+import ProductImage from "../components/common/productImages";
+import PricingPanel from "../components/common/pricingPanel";
+import ProductInfo from "../components/common/productInfo";
+import AddToCart from "../components/common/addToCart";
 
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { getProducts } from "../slices/productSlice";
 
 const Product = (props) => {
   const { id: productId } = useParams();
-  const product = [...getProducts()].find(
-    (product) => product._id === productId
+  const products = useSelector(getProducts)
+
+  const product = [...products].find((p) => p._id === productId
   );
 
-  const { name, companyName, desc, originalPrice, discountedPrice, images } =
-    product;
+
+  const { name, companyName, desc, originalPrice, discountedPrice, images } = {...product};
 
   return (
     <React.Fragment>

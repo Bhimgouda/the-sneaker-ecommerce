@@ -67,13 +67,13 @@ const ProductOverlay = (props) => {
         </span>
         <div className="overlay__image">
           <div className="image-slider">
-            <img src={images[currentImage]} />
+            <img loading="lazy" src={images && images[currentImage]} />
           </div>
         </div>
       </div>
 
       <div className="thumbnail-container">
-        {images.map((img, index) => {
+        {images && images.map((img, index) => {
           let thumbnailClass = "thumbnail ";
           if (index === currentImage) thumbnailClass += "thumbnail__current";
           return (

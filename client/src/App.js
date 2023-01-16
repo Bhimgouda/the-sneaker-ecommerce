@@ -1,11 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import React, { Component, lazy, Suspense} from "react";
+import React, { lazy, Suspense, useState} from "react";
 import Navbar from "./components/navbar";
 import Contact from "./components/contact";
 import NotFound from "./components/not-found";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
-import { getUser } from "./slices/userSlice";
 
 // Lazy load components
 const Collection = lazy(() => import("./components/collections"));
@@ -13,17 +12,16 @@ const Store = lazy(() => import("./components/store"));
 const Product = lazy(() => import("./components/product"));
 const About = lazy(() => import("./components/about"));
 
-class App extends Component {
-  state = { productsInCart: [], loading: false };
+function App() {
+  const [productsInCart, setProductsInCart] = useState([]);
 
-  handleCheckout = () => {
-    console.log("checkout");
-    this.setState({ productsInCart: [] });
+  const handleCheckout = () => {
+    setProductsInCart([]);
   };
 
-  handleATC = (product, itemsCount) => {
+  const handleATC = (product, itemsCount) => {
     let edited = false;
-    let productsInCart = [...this.state.productsInCart].map((p) => {
+    let newProductsInCart = [...productsInCart].map((p) => {
       if (p._id === product._id) {
         p.itemsCount = p.itemsCount + itemsCount;
         edited = true;
@@ -31,32 +29,26 @@ class App extends Component {
       }
       return p;
     });
+
     if (!edited) {
       product.itemsCount = itemsCount;
-      productsInCart.push(product);
+      newProductsInCart.push(product);
     }
-    this.setState({ productsInCart });
+    setProductsInCart(newProductsInCart);
   };
 
-  handleDelete = (id) => {
-    let productsInCart = [...this.state.productsInCart];
-    productsInCart = productsInCart.filter((p) => p._id !== id);
-    this.setState({ productsInCart });
+  const handleDelete = (id) => {
+    let newProductsInCart = [...productsInCart];
+    newProductsInCart = newProductsInCart.filter((p) => p._id !== id);
+    setProductsInCart(newProductsInCart);
   };
 
-
-;
-
-  
-  render() {
-
-    const { productsInCart } = this.state;
-    return (
-      <Provider store={store}>
+  return (
+    <Provider store={store}>
         <header>
           <Navbar
-            handleCheckout={this.handleCheckout}
-            onDelete={this.handleDelete}
+            handleCheckout={handleCheckout}
+            onDelete={handleDelete}
             productsInCart={productsInCart}
           />
         </header>
@@ -64,8 +56,8 @@ class App extends Component {
           <main>
             <Routes>
               <Route path="/" element={<Store />} />
-              <Route path="/category/:collection/product/:id" element={<Product onATC={this.handleATC} />}/>
-              <Route path="/product/:id" element={<Product onATC={this.handleATC} />}/>
+              <Route path="/category/:collection/product/:id" element={<Product onATC={handleATC} />}/>
+              <Route path="/product/:id" element={<Product onATC={handleATC} />}/>
               <Route path="/store" element={<Store />} />
               <Route path="/collections" element={<Collection />} />
               <Route path="/category/:id" element={<Store />} />
@@ -76,8 +68,7 @@ class App extends Component {
           </main>
         </Suspense>
       </Provider>
-    );
-  }
+  )
 }
 
 export default App;

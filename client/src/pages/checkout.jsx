@@ -1,15 +1,45 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import CheckoutProduct from '../components/CheckoutProduct'
+import { getCartItems, getTotalQuantity, itemsSubTotal } from '../slices/cartSlice'
+import { getUser } from '../slices/userSlice'
+import { loadStripe } from "@stripe/stripe-js"
+import axios from 'axios'
+const stripePromise = loadStripe("pk_test_51MRGDdSJE2KPi040JA7fV8PuGD8isSp5WG8qj6sDDzDiC6yzplfq79kCiKgwWhKJqoo2A1axfVewQoqBmrb8P8qP00TNrPxZyd")
 
 function Checkout() {
+
+    const items = useSelector(getCartItems)
+    const user = useSelector(getUser)
+    const totalItems = useSelector(getTotalQuantity)
+    const itemsSubtotal = useSelector(itemsSubTotal)
+
+    const createCheckoutSession = async()=>{
+        const stripe = await stripePromise;
+
+        // Calling the backend to create a stripe checkout session and get the session id
+        const {data: sessionId} = await axios.post("/api/create-checkout-session", {
+          items,
+          email: user.email,
+        })
+
+        const checkout = await stripe.redirectToCheckout({
+          sessionId
+        }
+        )
+
+        if(checkout.error) alert(checkout.error.message);
+    }
+
   return (
     <div className='bg-gray-100'>
-      <main className='checkout'>
+      <main className='checkout container'>
 
         {/* Left part */}
         <div className="checkout__left">
-          <img loading="lazy" className='checkout__banner' style={{"maxWidth":"1020px", "maxHeight": "250px", "objectFit":"contain"}} src="https://links.papareact.com/ikj"/>
+
           <div className="checkout__basket">
-            <h1 className='title title--underline'>{items.length ? "Your Shopping basket": "Your Amazon basket is empty"}</h1>
+            <h1 className="checkout__title">{items.length ? "Your Shopping cart": "Your shopping cart is empty"}</h1>
 
             {items.map((item, index)=>{
               return <CheckoutProduct key={index} item={item} />
@@ -21,10 +51,10 @@ function Checkout() {
         {
           items.length ? 
             <div className='checkout__right'>
-            <h5 className='checkout__right__subtotal'>Subtotal ({items.length} Items): <span style={{"fontWeight":"bolder"}}> ₹{itemsSubtotal}</span></h5>
-              {user._id ?
-              <button onClick={createCheckoutSession} role="link" className='btn btn--atc btn--checkout' >Proceed to Checkout</button> : 
-              <button disabled={!user} className='btn btn--grey'>Sign in to Checkout</button>
+            <h5 className='checkout__right__subtotal'>Subtotal ({totalItems} Items): <span style={{"fontWeight":"bolder"}}> ${itemsSubtotal}</span></h5>
+              {user ?
+              <button onClick={createCheckoutSession} role="link" className='btn btn--checkout' >Proceed to Checkout</button> : 
+              <button disabled={!user} className='btn'>Sign in to Checkout</button>
               }
             </div>
             : null

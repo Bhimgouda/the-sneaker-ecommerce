@@ -1,6 +1,10 @@
 [
     {
       "name": "Fall Limited Editions",
+      "rating":{
+        "rate": 4,
+        "count": 1000
+      },
       "companyName": "SNEAKER COMPANY",
       "originalPrice": 250,
       "discountedPrice": 125,
@@ -15,6 +19,10 @@
     },
     {
       "name": "ASTIR THEBE MAGUGU",
+      "rating":{
+        "rate": 4,
+        "count": 1000
+      },
       "companyName": "adidas originals",
       "originalPrice": 182,
       "discountedPrice": 162,
@@ -29,6 +37,10 @@
     },
     {
       "name": "AIR JORDAN 12 STEALTH",
+      "rating":{
+        "rate": 4,
+        "count": 1000
+      },
       "companyName": "Nike",
       "originalPrice": 900,
       "discountedPrice": 450,
@@ -43,6 +55,10 @@
     },
     {
       "name": "LIGHT STAR SNEAKERS",
+      "rating":{
+        "rate": 4,
+        "count": 1000
+      },
       "companyName": "NIKE",
       "originalPrice": 180,
       "discountedPrice": 162,
@@ -57,6 +73,10 @@
     },
     {
       "name": "All Star Chuck Taylor",
+      "rating":{
+        "rate": 4,
+        "count": 1000
+      },
       "companyName": "CONVERSE",
       "originalPrice": 300,
       "discountedPrice": 228,
@@ -71,6 +91,10 @@
     },
     {
       "name": "Cloud 9 Lights",
+      "rating":{
+        "rate": 4,
+        "count": 1000
+      },
       "companyName": "Adidas",
       "originalPrice": 290,
       "discountedPrice": 195,
@@ -85,6 +109,10 @@
     },
     {
       "name": "Stripe High Edition",
+      "rating":{
+        "rate": 4,
+        "count": 1000
+      },
       "companyName": "nike",
       "originalPrice": 220,
       "discountedPrice": 175,
@@ -99,6 +127,10 @@
     },
     {
       "name": "Everyday Sneakers",
+      "rating":{
+        "rate": 4,
+        "count": 1000
+      },
       "companyName": "lulu",
       "originalPrice": 182,
       "discountedPrice": 162,
@@ -113,6 +145,10 @@
     },
     {
       "name": "Sky Runner Sneakers",
+      "rating":{
+        "rate": 4,
+        "count": 1000
+      },
       "companyName": "riders",
       "originalPrice": 900,
       "discountedPrice": 450,
@@ -127,6 +163,10 @@
     },
     {
       "name": "Black Cloud Nine Edition",
+      "rating":{
+        "rate": 4,
+        "count": 1000
+      },
       "companyName": "nike",
       "originalPrice": 225,
       "discountedPrice": 150,
@@ -141,6 +181,10 @@
     },
     {
       "name": "Night Star Sneakers",
+      "rating":{
+        "rate": 4,
+        "count": 1000
+      },
       "companyName": "nike",
       "originalPrice": 182,
       "discountedPrice": 162,
@@ -155,6 +199,10 @@
     },
     {
       "name": "Cloud 9 Lights",
+      "rating":{
+        "rate": 4,
+        "count": 1000
+      },
       "companyName": "addidas",
       "originalPrice": 900,
       "discountedPrice": 450,

@@ -7,8 +7,8 @@ const {sessionConfig} = require("./config/sessionConfig")
 const googelAuthRouter = require("./routes/googleAuth")
 const userRouter = require("./routes/user")
 const productRouter = require("./routes/product")
+const paymentRouter = require("./routes/paymentRoute")
 const {errorHandlingMiddleware} = require("./middleware")
-
 
 // ---------------------------------- ESSENTIALS ----------------------------------//
 
@@ -18,6 +18,7 @@ const dbUrl = process.env.MONGODB_URI;
 // ---------------------------------- SESSION-CONFIG-------------------------------//
 
 app.use(session(sessionConfig));
+app.use(express.json())
 
 // --------------------------------- APP ROUTES ---------------------------------------- //
 
@@ -26,6 +27,8 @@ app.use("/api/auth/google/callback", googelAuthRouter)
 app.use("/api", userRouter)
 
 app.use("/api/products", productRouter)
+
+app.use("/api", paymentRouter)
 
 // -------------------------------- Error Handling middleware --------------------------//
 

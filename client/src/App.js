@@ -8,6 +8,7 @@ import {setUser} from './slices/userSlice'
 import axios from "axios";
 import { setProducts } from "./slices/productSlice";
 import Checkout from "./pages/checkout";
+import Sucess from "./pages/sucess";
 // import Collection from "./pages/collections"
 // import Store from "./pages/store"
 // import Product from "./pages/product"
@@ -65,6 +66,7 @@ function App() {
               <Route path="/product/:id" element={<Product />}/>
               <Route path="/store" element={<Store />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/success" element={<Sucess />} />
               <Route path="/collections" element={<Collection />} />
               <Route path="/category/:id" element={<Store />} />
               <Route path="/contact" element={<Contact />} />

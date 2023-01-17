@@ -13,10 +13,10 @@ const Navbar = () => {
   const [cartVisiblity, setCartVisiblity] = useState("hide");
 
 
-  const handleCartClick = () => {
-    if (cartVisiblity === "hide") setCartVisiblity("show");
-    else setCartVisiblity("hide");
-  };
+  // const handleCartClick = () => {
+  //   if (cartVisiblity === "hide") setCartVisiblity("show");
+  //   else setCartVisiblity("hide");
+  // };
 
   const handleNavLinkClick = (label, link) => {
     const handleToggle = () => {
@@ -47,10 +47,10 @@ const Navbar = () => {
           toggleValue={toggleValue}
         />
       </div>
-      <UserSection onCartClick={handleCartClick} />
-      <ProductCart
+      <UserSection />
+      {/* <ProductCart
         cartVisiblity={cartVisiblity}
-      />
+      /> */}
     </nav>
   );
 };

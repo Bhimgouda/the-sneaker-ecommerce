@@ -1,11 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getcart, removeFromcart } from "../../slices/cartSlice";
+import { getCartItems, removeFromcart } from "../../slices/cartSlice";
 
 const ProductCart = (props) => {
   const { cartVisiblity } = props;
-  const productsInCart = [...useSelector(getcart)]
+  const productsInCart = [...useSelector(getCartItems)]
   const dispatch = useDispatch()
 
   let productCartClass = "product--cart product--cart--hidden product--cart--empty";

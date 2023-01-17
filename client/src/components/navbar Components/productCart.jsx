@@ -1,9 +1,18 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { getcart, removeFromcart } from "../../slices/cartSlice";
 
 const ProductCart = (props) => {
-  const { onCheckout, onDelete, cartVisiblity, productsInCart } = props;
-  let productCartClass =
-    "product--cart product--cart--hidden product--cart--empty";
+  const { cartVisiblity } = props;
+  const productsInCart = [...useSelector(getcart)]
+  const dispatch = useDispatch()
+
+  let productCartClass = "product--cart product--cart--hidden product--cart--empty";
+
+  const handleRemoveFromcart = (id)=>{
+    dispatch(removeFromcart(id))
+  }
 
   if (cartVisiblity === "show" && productsInCart.length === 0)
     productCartClass = "product--cart product--cart--empty";
@@ -18,7 +27,7 @@ const ProductCart = (props) => {
         <div className="cart__products">
           <p className="empty-cart-message">Your cart is empty.</p>
           {productsInCart.map((product) => {
-            const { name, discountedPrice, itemsCount, images, _id } = product;
+            const { name, discountedPrice, quantity, images, _id } = product;
             return (
               <div
                 key={product._id}
@@ -35,15 +44,17 @@ const ProductCart = (props) => {
                     </span>{" "}
                     x
                     <span className="cart__product-quantity">
-                      {" " + itemsCount}
+                      {" " + quantity}
                     </span>
                     <span className="price cart__product-total">
-                      {itemsCount * discountedPrice}
+                      {quantity * discountedPrice}
                     </span>
                   </div>
                 </div>
                 <div
-                  onClick={() => onDelete(_id)}
+                  onClick={()=>{
+                    handleRemoveFromcart(_id)
+                  }}
                   className="cart__delete-icon"
                 >
                   <svg
@@ -65,9 +76,11 @@ const ProductCart = (props) => {
             );
           })}
         </div>
-        <button onClick={onCheckout} className="btn btn--checkout">
-          Checkout
-        </button>
+          <Link to="/checkout">
+          <button className="btn btn--checkout">
+            Checkout
+          </button>
+          </Link>
       </div>
     </div>
   );

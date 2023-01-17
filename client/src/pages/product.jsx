@@ -5,16 +5,21 @@ import ProductInfo from "../components/common/productInfo";
 import AddToCart from "../components/common/addToCart";
 
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../slices/productSlice";
+import { addTocart } from "../slices/cartSlice";
 
 const Product = (props) => {
-  const { id: productId } = useParams();
+  const dispatch = useDispatch()
   const products = useSelector(getProducts)
+  const { id: productId } = useParams();
 
   const product = [...products].find((p) => p._id === productId
   );
 
+  const handleAddToCart = (itemsCount)=>{
+    dispatch(addTocart({...product, quantity: itemsCount}))
+  }
 
   const { name, companyName, desc, originalPrice, discountedPrice, images } = {...product};
 
@@ -30,7 +35,7 @@ const Product = (props) => {
             originalPrice={originalPrice}
             discountedPrice={discountedPrice}
           />
-          <AddToCart onATC={(itemsCount) => props.onATC(product, itemsCount)} />
+          <AddToCart onATC={handleAddToCart} />
         </div>
       </section>
     </React.Fragment>

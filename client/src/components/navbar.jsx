@@ -6,12 +6,12 @@ import NavLinks from "./navbar Components/navLinks";
 import ProductCart from "./navbar Components/productCart";
 import UserSection from "./navbar Components/userSection";
 
-const Navbar = ({ handleCheckout, onDelete, productsInCart }) => {
+const Navbar = () => {
   const navigate = useNavigate()
   const [activeLink, setActiveLink] = useState("");
   const [toggleValue, setToggle] = useState(false);
   const [cartVisiblity, setCartVisiblity] = useState("hide");
-  const [totalQuantity, setQuantity] = useState(0);
+
 
   const handleCartClick = () => {
     if (cartVisiblity === "hide") setCartVisiblity("show");
@@ -34,12 +34,7 @@ const Navbar = ({ handleCheckout, onDelete, productsInCart }) => {
     return navigate(link)
   };
 
-  useEffect(() => {
-    let quantity = 0;
-    if (productsInCart.length > 0)
-      productsInCart.forEach((p) => (quantity += p["itemsCount"]));
-    setQuantity(quantity);
-  }, [productsInCart]);
+
 
   return (
     <nav className="navbar navbar-container">
@@ -52,12 +47,9 @@ const Navbar = ({ handleCheckout, onDelete, productsInCart }) => {
           toggleValue={toggleValue}
         />
       </div>
-      <UserSection quantity={totalQuantity} onCartClick={handleCartClick} />
+      <UserSection onCartClick={handleCartClick} />
       <ProductCart
-        onCheckout={handleCheckout}
-        onDelete={onDelete}
         cartVisiblity={cartVisiblity}
-        productsInCart={productsInCart}
       />
     </nav>
   );

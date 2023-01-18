@@ -1103,8 +1103,8 @@ img{
   
   .checkout__product__description{
     color: var(--color-Dark-grayish-blue);
-    font-size: 1.3rem;
-    line-height: 1.25;
+    font-size: 1.2rem;
+    line-height: 1.3;
   }
   
   .checkout .checkout__product__title{
@@ -1151,7 +1151,7 @@ img{
   
 @media screen and (min-width:768px) {
     .checkout .checkout__product__title{
-      font-size: 1.8rem;
+      font-size: 2rem;
     }
 
     .btn--remove{
@@ -1164,8 +1164,8 @@ img{
     }
   
     .checkout__product__description{
-      font-size: 1.4rem;
-      line-height: 1.3;
+      font-size: 1.3rem;
+      line-height: 1.5;
     }
   
     .checkout .btn--quantity{

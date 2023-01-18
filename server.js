@@ -8,6 +8,7 @@ const googelAuthRouter = require("./routes/googleAuth")
 const userRouter = require("./routes/user")
 const productRouter = require("./routes/product")
 const paymentRouter = require("./routes/paymentRoute")
+const CartRoutes = require("./routes/cartRoutes")
 const {errorHandlingMiddleware} = require("./middleware")
 
 // ---------------------------------- ESSENTIALS ----------------------------------//
@@ -29,6 +30,8 @@ app.use("/api", userRouter)
 app.use("/api/products", productRouter)
 
 app.use("/api", paymentRouter)
+
+app.use("/api/cart", CartRoutes)
 
 // -------------------------------- Error Handling middleware --------------------------//
 

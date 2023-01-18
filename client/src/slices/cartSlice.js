@@ -8,6 +8,9 @@ export const cartSlice = createSlice({
     name: "cart",
     initialState,
     reducers:{
+        requestUserCart: async(state, action)=>{
+            state.items = [...action.payload]
+        },
         addTocart: (state, action)=>{
             const itemIndex = state.items.findIndex(item=>item._id === action.payload._id)
             if(itemIndex !== -1){
@@ -27,13 +30,13 @@ export const cartSlice = createSlice({
         cartItemQuantityDecrementer: (state,action)=>{
             state.items = [...state.items].map(item=>{
                 if(item._id === action.payload && item.quantity > 1) item.quantity --;
-                return item
+                return item;
             })
         }
     }
 })
 
-export const {addTocart, removeFromcart, cartItemQuantityDecrementer, cartItemQuantityIncrementer} = cartSlice.actions;
+export const {addTocart, removeFromcart, cartItemQuantityDecrementer, cartItemQuantityIncrementer, requestUserCart} = cartSlice.actions;
 
 export const getCartItems = (state)=>state.cart.items;
 export const getTotalQuantity = (state)=>state.cart.items.reduce((a,b)=>a + b.quantity, 0);

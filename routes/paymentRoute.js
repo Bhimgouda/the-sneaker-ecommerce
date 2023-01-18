@@ -10,18 +10,21 @@ router.post("/create-checkout-session", catchAsync(async(req,res)=>{
 
     // Transforming the items array into formal manner in which stripe understands
     const transformedItems = items.map(item=>{
+        console.log(item.images.map(img=>`${process.env.HOST}${img}`))
         return {
             quantity:item.quantity,
             price_data: {
                 currency: "inr",
                 unit_amount: item.originalPrice*100,
                 product_data:{
-                        description: item.desc,
+                        description: `${item.desc.slice(0,55)}...`,
                         name: item.name,
+                        // images: item.images,
                 }
             }
         }
     })
+
 
     // stripe Creating checkout session using
     const session = await stripe.checkout.sessions.create({
@@ -43,8 +46,8 @@ router.post("/create-checkout-session", catchAsync(async(req,res)=>{
         },
         line_items: transformedItems,
         mode: "payment",
-        success_url: `http://localhost:3000/success`,
-        cancel_url: "http://localhost:3000/checkout",
+        success_url: `${process.env.HOST}/success`,
+        cancel_url: `${process.env.HOST}/checkout`,
         metadata: {
             email,
             images: JSON.stringify(items.map((item) => item.image)),

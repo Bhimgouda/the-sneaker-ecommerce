@@ -15,7 +15,6 @@ export const userSlice = createSlice({
         removeUser: async(state, action)=>{
             state.currentUser = undefined;
             const {data} = await axios.get("/api/logout");
-            console.log(data.message)
         }
     }
 })

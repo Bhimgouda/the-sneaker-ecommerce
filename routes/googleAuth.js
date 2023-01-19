@@ -1,6 +1,5 @@
 const { default: axios } = require("axios");
 const express = require("express");
-const Cart = require("../model/cart");
 const router = express.Router()
 const User = require("../model/user");
 const catchAsync = require("../utils/catchAsync");
@@ -48,20 +47,6 @@ router.get("/", catchAsync(async(req,res)=>{
       name: userData.name,
       email: userData.email,
       profilePic: userData.picture,
-    })
-
-    await Cart.create({
-      user: _id,
-      items:[
-        {
-          quantity: 2,
-          product: "63c65fa51be5f6ee5b80cc47"
-        },
-        {
-          quantity: 3,
-          product: "63c65fa51be5f6ee5b80cc45"
-        }
-      ]
     })
 
     req.session.user_id = _id;

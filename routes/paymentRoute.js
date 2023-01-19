@@ -1,16 +1,15 @@
 const express = require("express");
+const { isLoggedIn } = require("../middleware");
 const catchAsync = require("../utils/catchAsync");
 const router = express.Router();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-
-
-router.post("/create-checkout-session", catchAsync(async(req,res)=>{
+router.post("/create-checkout-session", isLoggedIn, catchAsync(async(req,res)=>{
     const {items, email} = req.body;
 
     // Transforming the items array into formal manner in which stripe understands
     const transformedItems = items.map(item=>{
-        console.log(item.images.map(img=>`${process.env.HOST}${img}`))
+        console.log(item)
         return {
             quantity:item.quantity,
             price_data: {
@@ -19,7 +18,7 @@ router.post("/create-checkout-session", catchAsync(async(req,res)=>{
                 product_data:{
                         description: `${item.desc.slice(0,55)}...`,
                         name: item.name,
-                        // images: item.images,
+                        images: item.images,
                 }
             }
         }
@@ -50,7 +49,7 @@ router.post("/create-checkout-session", catchAsync(async(req,res)=>{
         cancel_url: `${process.env.HOST}/checkout`,
         metadata: {
             email,
-            images: JSON.stringify(items.map((item) => item.image)),
+            images: JSON.stringify(items.map((item) => item.images[0])),
         }
     })
 

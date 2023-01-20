@@ -18,19 +18,8 @@ const seedDB = async()=>{
 
     // await Product.insertMany(products)
 
-    await Cart.create({
-        user: "63c91b7e8203b4cb073ae814",
-        products: [
-            {
-                product: "63c91b49cc428e962497e29e",
-                quantity: 2,
-            },
-            {
-                product: "63c91b49cc428e962497e294",
-                quantity: 5,
-            },
-        ]
-    })
+    await Cart.deleteMany({})
+    await User.deleteMany({})
 
     mongoose.disconnect()
 

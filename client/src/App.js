@@ -10,6 +10,7 @@ import { getProducts, setProducts } from "./slices/productSlice";
 import Checkout from "./pages/checkout";
 import Sucess from "./pages/success";
 import Orders from "./pages/orders";
+import { getCartItems, setUserCart } from "./slices/cartSlice";
 
 // Lazy load components
 const Collection = lazy(() => import("./pages/collections"));
@@ -21,8 +22,6 @@ function App() {
   const [productsInCart, setProductsInCart] = useState([]);
   const dispatch = useDispatch()
 
-  const products = [...useSelector(getProducts)]
-  console.log(products.slice(0,2))
 
   useEffect(() => {
     const getCurrentUser = async()=>{
@@ -32,7 +31,7 @@ function App() {
           console.log(user)
           dispatch(setUser(user));
           const {data:cart} = await axios.get("/api/cart")
-          // dispatch(setUserCart)
+          dispatch(setUserCart(cart.items))
         }
       }
       catch(e){

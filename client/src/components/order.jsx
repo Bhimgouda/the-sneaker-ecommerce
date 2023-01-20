@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 function Order({order}) {
 
@@ -21,7 +22,7 @@ function Order({order}) {
 
       </div>
       <div className='order__bottom'>
-        {images.map(image=><img className='order__image' src={image} />)}
+        {images.map(image=><Link to={`/product/${_id}`}><img className='order__image' src={image} /></Link>)}
       </div>
     </div>
   )

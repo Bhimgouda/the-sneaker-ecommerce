@@ -9,7 +9,7 @@ const stripePromise = loadStripe("pk_test_51MRGDdSJE2KPi040JA7fV8PuGD8isSp5WG8qj
 
 function Checkout() {
 
-    const items = useSelector(getCartItems)
+    const items = [...useSelector(getCartItems)]
     const user = useSelector(getUser)
     const totalItems = useSelector(getTotalQuantity)
     const itemsSubtotal = useSelector(itemsSubTotal)

@@ -1,5 +1,6 @@
 const { default: axios } = require("axios");
 const express = require("express");
+const Cart = require("../model/cart");
 const router = express.Router()
 const User = require("../model/user");
 const catchAsync = require("../utils/catchAsync");
@@ -28,7 +29,7 @@ const getUserDataFromAccessToken = async(accessToken)=>{
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-      });; 
+      });
     return data;
 }
 
@@ -49,7 +50,14 @@ router.get("/", catchAsync(async(req,res)=>{
       profilePic: userData.picture,
     })
 
+    // Creating a cart for the newly registered user
+    await Cart.create({
+      user: _id,
+      items: [],
+    })
+
     req.session.user_id = _id;
+
   }
 
 

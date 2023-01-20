@@ -1,4 +1,5 @@
 import {configureStore} from "@reduxjs/toolkit";
+import thunk from "redux-thunk";
 import ProductsReducer from "../slices/productSlice";
 import userReducer from "../slices/userSlice"
 import cartReducer from "../slices/cartSlice"
@@ -9,5 +10,5 @@ export const store = configureStore({
         products: ProductsReducer,
         user: userReducer,
         cart: cartReducer,
-    }    
+    },
 })

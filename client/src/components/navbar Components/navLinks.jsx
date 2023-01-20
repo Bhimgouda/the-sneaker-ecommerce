@@ -6,7 +6,7 @@ const NavLinks = ({ toggleValue, onNavLinkClick, activeLink }) => {
     { label: "Collections", link: "/collections" },
     { label: "Men", link: "/category/men" },
     { label: "Women", link: "/category/women" },
-    { label: "Today's Pick", link: "/product/63c65fa51be5f6ee5b80cc47" },
+    { label: "Today's Pick", link: "/product/63c91b49cc428e962497e297" },
     { label: "About me", link: "/about" },
   ];
   return (

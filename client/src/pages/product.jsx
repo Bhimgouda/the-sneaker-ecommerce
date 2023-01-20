@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../slices/productSlice";
 import { addTocart } from "../slices/cartSlice";
+import axios from "axios";
 
 const Product = (props) => {
   const dispatch = useDispatch()
@@ -16,9 +17,17 @@ const Product = (props) => {
 
   const product = [...products].find((p) => p._id === productId
   );
-
-  const handleAddToCart = (itemsCount)=>{
-    dispatch(addTocart({...product, quantity: itemsCount}))
+  
+  
+  const handleAddToCart = async(itemsCount)=>{
+    const cartItem = {product, quantity: itemsCount}
+    dispatch(addTocart(cartItem))
+    try{
+      axios.put('/api/cart', cartItem)
+    }
+    catch(e){
+      //
+    }
   }
 
   const { name, companyName, desc, originalPrice, discountedPrice, images } = {...product};

@@ -3,6 +3,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { cartItemQuantityDecrementer, cartItemQuantityIncrementer, removeFromcart } from '../slices/cartSlice'
+import http from "../services/httpService"
 
 
 function CheckoutProduct({item}) {
@@ -15,7 +16,7 @@ function CheckoutProduct({item}) {
     const handleItemIncrease = async()=>{
         dispatch(cartItemQuantityIncrementer(product._id))
         try {
-          await axios.patch(`/api/cart/${product._id}`, {quantity: 1})
+          await http.patch(`/api/cart/${product._id}`, {quantity: 1})
         } catch (e) {
           // error handling
         }
@@ -24,7 +25,7 @@ function CheckoutProduct({item}) {
     const handleItemDecrease = async()=>{
         dispatch(cartItemQuantityDecrementer(product._id))
         try{
-          await axios.patch(`/api/cart/${product._id}`, {quantity: -1})
+          await http.patch(`/api/cart/${product._id}`, {quantity: -1})
         }
         catch(e){
           
@@ -34,7 +35,7 @@ function CheckoutProduct({item}) {
     const handleRemoveItem = async(id)=>{
       dispatch(removeFromcart(product._id))
       try {
-        await axios.delete(`/api/cart/${product._id}`)
+        await http.delete(`/api/cart/${product._id}`)
       } catch (e) {
         
       }
@@ -57,7 +58,7 @@ function CheckoutProduct({item}) {
             </div>
             <p className='checkout__product__description line-clamp-2'>{product.desc}</p>
             <div className='checkout__product__price'>
-              <span>${product.discountedPrice}</span>
+              <span className='price'>{product.discountedPrice}</span>
             </div>
         </div>
 

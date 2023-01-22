@@ -1,12 +1,19 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getProducts } from "../../slices/productSlice";
 
 const NavLinks = ({ toggleValue, onNavLinkClick, activeLink }) => {
+
+  const products = [...useSelector(getProducts)]
+  const randomNum = Math.floor(Math.random()*(products.length-1 - 0 + 1));
+  const product = products[randomNum] && products[randomNum]._id
+
   const theNavLinks = [
     { label: "Collections", link: "/collections" },
     { label: "Men", link: "/category/men" },
     { label: "Women", link: "/category/women" },
-    { label: "Today's Pick", link: "/product/63c91b49cc428e962497e297" },
+    { label: "Today's Pick", link: `/product/${product}` },
     { label: "About me", link: "/about" },
   ];
   return (

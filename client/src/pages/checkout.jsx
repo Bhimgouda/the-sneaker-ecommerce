@@ -4,7 +4,7 @@ import CheckoutProduct from '../components/CheckoutProduct'
 import { getCartItems, getTotalQuantity, itemsSubTotal } from '../slices/cartSlice'
 import { getUser } from '../slices/userSlice'
 import { loadStripe } from "@stripe/stripe-js"
-import axios from 'axios'
+import http from "../services/httpService" 
 const stripePromise = loadStripe("pk_test_51MRGDdSJE2KPi040JA7fV8PuGD8isSp5WG8qj6sDDzDiC6yzplfq79kCiKgwWhKJqoo2A1axfVewQoqBmrb8P8qP00TNrPxZyd")
 
 function Checkout() {
@@ -18,7 +18,7 @@ function Checkout() {
         const stripe = await stripePromise;
 
         // Calling the backend to create a stripe checkout session and get the session id
-        const {data: sessionId} = await axios.post("/api/create-checkout-session", {
+        const {data: sessionId} = await http.post("/api/create-checkout-session", {
           items,
           email: user.email,
         })
@@ -51,7 +51,7 @@ function Checkout() {
         {
           items.length ? 
             <div className='checkout__right'>
-            <h5 className='checkout__right__subtotal'>Subtotal ({totalItems} Items): <span style={{"fontWeight":"bolder"}}> ${itemsSubtotal}</span></h5>
+            <h5 className='checkout__right__subtotal'>Subtotal ({totalItems} Items): <span style={{"fontWeight":"bolder"}}> <span className="price">{itemsSubtotal}</span></span></h5>
               {user ?
               <button onClick={createCheckoutSession} role="link" className='btn btn--checkout' >Proceed to Checkout</button> : 
               <button disabled={!user} className='btn'>Sign in to Checkout</button>
@@ -59,7 +59,6 @@ function Checkout() {
             </div>
             : null
         }
-
       </main>
     </div>
   )

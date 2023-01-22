@@ -1,16 +1,17 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import React, { lazy, Suspense, useEffect, useState} from "react";
 import Navbar from "./components/navbar";
 import Contact from "./pages/contact";
 import NotFound from "./pages/not-found";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import {setUser} from './slices/userSlice'
-import axios from "axios";
 import { getProducts, setProducts } from "./slices/productSlice";
 import Checkout from "./pages/checkout";
 import Sucess from "./pages/success";
 import Orders from "./pages/orders";
 import { getCartItems, setUserCart } from "./slices/cartSlice";
+import http from "./services/httpService"
+import toast, { Toaster } from 'react-hot-toast';
 
 // Lazy load components
 const Collection = lazy(() => import("./pages/collections"));
@@ -18,25 +19,21 @@ const Store = lazy(() => import("./pages/store"));
 const Product = lazy(() => import("./pages/product"));
 const About = lazy(() => import("./pages/about"));
 
+
 function App() {
   const [productsInCart, setProductsInCart] = useState([]);
   const dispatch = useDispatch()
 
-
   useEffect(() => {
     const getCurrentUser = async()=>{
-      try{
-        const {data:user} = await axios.get('/api/current-user');
+        const {data:user} = await http.get('/api/current-user');
         if(user){
-          console.log(user)
           dispatch(setUser(user));
-          const {data:cart} = await axios.get("/api/cart")
-          dispatch(setUserCart(cart.items))
+          toast(`Welcome Back ${user.name.split(" ")[0]}`)
         }
-      }
-      catch(e){
-        console.log(e)
-      }
+        const {data:cart} = await http.get("/api/cart")
+        dispatch(setUserCart(cart.items))
+        // handle error
     }
     getCurrentUser()
   }, []);
@@ -44,7 +41,7 @@ function App() {
   
   useEffect(()=>{
     const requestProducts = async()=>{
-      const {data} = await axios.get("/api/products")
+      const {data} = await http.get("/api/products")
       dispatch(setProducts(data));
     }
     requestProducts()
@@ -56,6 +53,7 @@ function App() {
 
   return (
    <>
+   <Toaster />
       <header>
           <Navbar
             handleCheckout={handleCheckout}

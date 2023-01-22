@@ -12,11 +12,13 @@ mongoose.connect(dbUrl).then
 
 const seedDB = async()=>{
 
-    // await Product.deleteMany()
+    await Product.deleteMany()
 
-    // await User.deleteMany({})
-
-    // await Product.insertMany(products)
+    await Product.insertMany(products.map(product=>{
+        product.originalPrice *=85
+        product.discountedPrice *=85
+        return product;
+    }))
 
     await Cart.deleteMany({})
     await User.deleteMany({})

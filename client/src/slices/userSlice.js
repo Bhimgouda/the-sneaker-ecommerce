@@ -11,10 +11,10 @@ export const userSlice = createSlice({
     reducers:{
         setUser: (state, action)=>{
             if(action.payload) state.currentUser = {...action.payload}
+            else state.currentUser = undefined;
         },
         removeUser: async(state, action)=>{
             state.currentUser = undefined;
-            const {data} = await axios.get("/api/logout");
         }
     }
 })

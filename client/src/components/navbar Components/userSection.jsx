@@ -5,37 +5,19 @@ import queryString from "query-string"
 import { getTotalQuantity } from "../../slices/cartSlice";
 import { Link } from "react-router-dom";
 
-const UserSection = ({ onCartClick }) => {
+const UserSection = () => {
 
   const totalquantity = useSelector(getTotalQuantity)
 
     // This is to generate a query string
-    const query = queryString.stringify({
-      client_id: "1030463715027-p7jmac6ju1iia3fbj6a09d6hnt866ec1.apps.googleusercontent.com",
-      redirect_uri: 'http://localhost:5000/api/auth/google/callback',
-      scope: [
-        'https://www.googleapis.com/auth/userinfo.email',
-        'https://www.googleapis.com/auth/userinfo.profile',
-      ].join(' '), // space seperated string
-      response_type: 'code',
-      access_type: 'offline',
-      prompt: 'consent',
-    });
-    
-    // This link takes the user from client to google's sign in page
-    const googleLoginUrl = `https://accounts.google.com/o/oauth2/v2/auth?${query}`
 
   const user = useSelector(getUser);
-  const dispatch = useDispatch()
 
-  const handleLogout = ()=>{
-    dispatch(removeUser())
-  }
 
   return (
     <div className="user-section">
-      <Link to="/checkout">
-        <div className="user__cart-icon">
+  
+        <Link to="/checkout" className="user__cart-icon">
           <span className="user__total-quantity">{totalquantity}</span>
           <svg width="22" height="20" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -44,17 +26,17 @@ const UserSection = ({ onCartClick }) => {
               fillRule="nonzero"
             />
           </svg>
-        </div>
-      </Link>
+        </Link>
+
       <div className="user__profile">
         {
           user ?
-          <div onClick={handleLogout} className="user__image">
-            <img loading="lazy" src={user.profilePic} alt="" />
+          <div className="user__image">
+            <img id='user__profile-pic' src={user.profilePic} alt="" />
           </div>
           :
           <div className="user__login">
-              <a href={googleLoginUrl} className="nav__links">Login</a>
+              <a id="user__sign-in"  className="">Sign in</a>
           </div>
         }
       </div>

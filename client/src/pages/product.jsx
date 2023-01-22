@@ -3,12 +3,11 @@ import ProductImage from "../components/common/productImages";
 import PricingPanel from "../components/common/pricingPanel";
 import ProductInfo from "../components/common/productInfo";
 import AddToCart from "../components/common/addToCart";
-
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../slices/productSlice";
 import { addTocart } from "../slices/cartSlice";
-import axios from "axios";
+import http from "../services/httpService"
 
 const Product = (props) => {
   const dispatch = useDispatch()
@@ -23,7 +22,7 @@ const Product = (props) => {
     const cartItem = {product, quantity: itemsCount}
     dispatch(addTocart(cartItem))
     try{
-      axios.put('/api/cart', cartItem)
+      http.put('/api/cart', cartItem)
     }
     catch(e){
       //

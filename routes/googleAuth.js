@@ -39,25 +39,53 @@ router.get("/", catchAsync(async(req,res)=>{
   const {code} = req.query
   const accessToken = await getAccessTokenFromGoogle(code)
   const userData = await getUserDataFromAccessToken(accessToken)
+  
+  let user = await User.findOne({email: userData.email});
+  
+  if(user) { // For registered Users
+    req.session.user_id = user._id;
+    // Transfering cart items from localCart to userCart
+    const localCart = await Cart.findById(req.session.cart_id).populate("items.product")
+    const userCart = await Cart.findOne({user:user._id}).populate("items.product")
 
+    // Check by creating lookup object
+    const lookupObj = {};
 
-  const user = await User.findOne({email: userData.email});
-  if(user)  req.session.user_id = user._id;
-  else {
-    const {_id} = await User.create({
+    userCart.items.forEach((item,index)=>{
+      if(item.product){
+      lookupObj[item.product._id] = {quantity: item.quantity, itemIndex:index}
+      lookupObj[item.product.id]
+      }
+    })
+
+    localCart.items.forEach(item=>{
+      if(item.product){
+        const productId = item.product._id
+        lookupItem= lookupObj[productId]
+        if(lookupItem){
+         return userCart.items[lookupItem.itemIndex].quantity += item.quantity;
+        }
+        userCart.items.push({product: item.product, quantity: item.quantity})
+      }
+    })
+
+    await userCart.save()
+    await Cart.findByIdAndDelete(localCart._id);
+    req.session.cart_id = null;
+  }
+  
+  else { // For new users
+    user = await User.create({
       name: userData.name,
       email: userData.email,
       profilePic: userData.picture,
     })
+    req.session.user_id = user._id;
 
-    // Creating a cart for the newly registered user
-    await Cart.create({
-      user: _id,
-      items: [],
-    })
-
-    req.session.user_id = _id;
-
+    // Getting the localCart and transforming it to userCart
+    const cartId = req.session.cart_id
+    await Cart.findByIdAndUpdate(cartId, {user:user._id});
+    req.session.cart_id = null;
   }
 
 

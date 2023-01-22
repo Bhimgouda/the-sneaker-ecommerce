@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./css/index.css";
 import { BrowserRouter } from "react-router-dom";
-import "/node_modules/@fortawesome/fontawesome-free/css/all.css";
+// import "/node_modules/@fortawesome/fontawesome-free/css/all.css";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 

@@ -1,4 +1,5 @@
 const express = require("express");
+const Cart = require("../model/cart");
 const User = require("../model/user");
 const catchAsync = require("../utils/catchAsync");
 const router = express.Router();
@@ -9,12 +10,29 @@ router.get('/current-user', async(req,res)=>{
       const user = await User.findById(req.session.user_id);
       return res.send(user)
     }
-    return res.end()
+
+    // Creating a localCart for the user
+    else if(!req.session.cart_id){
+      const {_id} = await Cart.create({
+        items: [],
+      })
+      req.session.cart_id = _id;
+    }
+
+    return res.send()
 }) 
   
 router.get('/logout', catchAsync(async(req,res)=>{
     req.session.user_id = null;
-    return res.send({message:"You are successfully Logged Out"})
+
+    // creating localCart
+    const {_id} = await Cart.create({
+      items: [],
+    })
+    req.session.cart_id = _id;
+    
+    // This sends status code of 200
+    return res.send() 
 }))
 
 module.exports = router;

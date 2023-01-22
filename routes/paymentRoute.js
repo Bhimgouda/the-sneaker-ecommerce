@@ -13,7 +13,7 @@ router.post("/create-checkout-session", isLoggedIn, catchAsync(async(req,res)=>{
             quantity:item.quantity,
             price_data: {
                 currency: "inr",
-                unit_amount: item.product.originalPrice*100,
+                unit_amount: item.product.discountedPrice*100, // For cents, paisa purposes
                 product_data:{
                         description: `${item.product.desc.slice(0,55)}...`,
                         name: item.product.name,

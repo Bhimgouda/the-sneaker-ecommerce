@@ -25,7 +25,7 @@ router.post("/", express.raw({type:"application/json"}), catchAsync(async(req,re
         fulfillTheOrder(session)
     }
 
-    // Return a 200 response to acknowledge receipt of the event
+    // This sends status code of 200 to acknowledge receipt of the event
     res.send();
 }))
 

@@ -14,7 +14,7 @@ const UserProfile = () => {
 
   const query = queryString.stringify({
     client_id: "1030463715027-p7jmac6ju1iia3fbj6a09d6hnt866ec1.apps.googleusercontent.com",
-    redirect_uri: 'http://localhost:5000/api/auth/google/callback',
+    redirect_uri: 'http://localhost:5000/api/auth/google/callback', // CHANGES ON PRODUCTION
     scope: [
       'https://www.googleapis.com/auth/userinfo.email',
       'https://www.googleapis.com/auth/userinfo.profile',

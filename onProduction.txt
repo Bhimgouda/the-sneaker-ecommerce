@@ -1,6 +1,0 @@
-1. change server port accordingly
-2. add env GOOGLE_REDIRECT_URI
-3. change NODE_ENV to production
-
-On development mode
-change any instance of production damain to localhost

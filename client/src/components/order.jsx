@@ -22,7 +22,7 @@ function Order({order}) {
 
       </div>
       <div className='order__bottom'>
-        {images.map(image=><Link to={`/product/${_id}`}><img className='order__image' src={image} /></Link>)}
+        {images.map(image=><img className='order__image' src={image} />)}
       </div>
     </div>
   )

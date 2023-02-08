@@ -13,7 +13,7 @@ const getAccessTokenFromGoogle = async(codeFromGoogle)=>{
         data: {
           client_id: process.env.GOOGLE_CLIENT_ID,
           client_secret: process.env.GOOGLE_SECRET_API_KEY,
-          redirect_uri: process.env.GOOGLE_REDIRECT_URI || 'http://localhost:5000/api/auth/google/callback', // changes on production
+          redirect_uri: process.env.GOOGLE_REDIRECT_URI, // changes on production
           grant_type: 'authorization_code',
           code: codeFromGoogle,
         },
@@ -89,7 +89,7 @@ router.get("/", catchAsync(async(req,res)=>{
   }
 
 // changes on production
-  if(process.NODE_ENV !== "production"){ 
+  if(process.env.NODE_ENV !== "production"){ 
     return res.redirect("http://localhost:3000")
   }
   return res.redirect("/");

@@ -7,7 +7,8 @@ const router = express.Router();
 // As soon as user comes to client (even after google auth redirect) the client makes call to check if user has unexpired cookies to log him in
 router.get('/current-user', async(req,res)=>{
     if(req.session.user_id){
-      const user = await User.findById(req.session.user_id);
+      const user = await User.findById(req.session.user_id).sort();
+      user.orders.reverse()
       return res.send(user)
     }
 

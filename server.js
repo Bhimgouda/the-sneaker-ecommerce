@@ -14,7 +14,7 @@ const {errorHandlingMiddleware} = require("./middleware");
 
 // ---------------------------------- ESSENTIALS ----------------------------------//
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 const dbUrl = process.env.MONGODB_URI;
 
 // ----------------------------------- STRIPE WEBHOOK ROUTE ------------------------//
